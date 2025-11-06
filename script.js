@@ -1,20 +1,21 @@
-/* === Evidenzia lingua attiva === */
+/* =================== UTILITÀ GLOBALI =================== */
+
+/* ✅ Evidenzia la lingua attiva in base al path (/it, /en, /es) */
 (function(){
-  try{
-    const current = (location.pathname.split('/')[1] || 'it').toLowerCase(); // it | en | es
-    document.querySelectorAll('.lang-switch a').forEach(a=>{
-      if(a.dataset.lang === current){ a.classList.add('is-active'); a.setAttribute('aria-current','true'); }
-    });
-  }catch(e){}
+  const current = (location.pathname.split('/')[1] || 'it').toLowerCase();
+  document.querySelectorAll('.lang-switch a').forEach(a=>{
+    if(a.dataset.lang === current){
+      a.classList.add('is-active');
+      a.setAttribute('aria-current','true');
+    }
+  });
 })();
 
-/* === Reveal on scroll === */
+/* ✅ Effetto reveal (se in futuro userai class="reveal") */
 (function(){
   const els = document.querySelectorAll('.reveal');
-  if(!('IntersectionObserver' in window) || !els.length){
-    els.forEach(el=>el.classList.add('in'));
-    return;
-  }
+  if(!els.length) return;
+  if(!('IntersectionObserver' in window)){ els.forEach(el=>el.classList.add('in')); return; }
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{
       if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
@@ -23,27 +24,37 @@
   els.forEach(el=>io.observe(el));
 })();
 
-/* === Menu mobile: chiudi dopo click / fuori / ESC === */
+/* =================== NAV MOBILE =================== */
 (function(){
-  const cb  = document.getElementById('nav-check');
-  const nav = document.getElementById('mainnav');
-  const burger = document.querySelector('.nav-burger');
+  const cb     = document.getElementById('nav-check');   // checkbox
+  const nav    = document.getElementById('mainnav');     // ul
+  const burger = document.querySelector('.nav-burger');  // label
   if(!cb || !nav || !burger) return;
 
-  // chiudi quando clicchi un link del menu
+  /* ✅ aggiunge/rimuove classe sul body per nascondere il logo
+        (risolve il “logo appeso” quando il menu è aperto) */
+  const syncBodyClass = () => {
+    document.body.classList.toggle('is-nav-open', cb.checked);
+    burger.setAttribute('aria-expanded', cb.checked ? 'true' : 'false');
+  };
+  cb.addEventListener('change', syncBodyClass);
+  syncBodyClass();
+
+  /* ✅ chiude quando clicchi un link del menu */
   nav.querySelectorAll('a').forEach(a=>{
-    a.addEventListener('click', ()=>{ cb.checked = false; }, {passive:true});
+    a.addEventListener('click', ()=>{ cb.checked = false; syncBodyClass(); }, {passive:true});
   });
 
-  // chiudi cliccando fuori dal menu
-  document.addEventListener('click', (e)=>{
+  /* ✅ chiude cliccando fuori dal menu */
+  document.addEventListener('click',(e)=>{
     if(!cb.checked) return;
     const inside = nav.contains(e.target) || burger.contains(e.target) || e.target === cb;
-    if(!inside) cb.checked = false;
+    if(!inside){ cb.checked = false; syncBodyClass(); }
   }, {passive:true});
 
-  // chiudi con ESC (desktop)
-  document.addEventListener('keydown', (e)=>{
-    if(e.key === 'Escape') cb.checked = false;
+  /* ✅ chiude con ESC (desktop) */
+  document.addEventListener('keydown',(e)=>{
+    if(e.key === 'Escape'){ cb.checked = false; syncBodyClass(); }
   });
 })();
+
