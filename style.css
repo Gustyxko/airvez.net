@@ -2,7 +2,7 @@
 * { box-sizing: border-box; }
 html, body { height: 100%; margin: 0; padding: 0; }
 html, body, h1, h2, h3, p, a, nav, header, main, footer, section, ul, li, div {
-  writing-mode: horizontal-tb !important;  /* >>> Previene testo verticale */
+  writing-mode: horizontal-tb !important;  /* Previene testo verticale */
   text-orientation: mixed !important;
   transform: none !important;
 }
@@ -36,8 +36,9 @@ body{
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16px;
 }
-.logo{ font-weight:700; font-size: 1.15rem; color: var(--text); }
+.logo{ font-weight:700; font-size: 1.15rem; color: var(--text); text-decoration:none; }
 .nav-links{ list-style:none; display:flex; gap: 18px; margin:0; padding:0; }
 .nav-links a{
   text-decoration:none;
@@ -83,6 +84,8 @@ main{ min-height: calc(100dvh - 120px); display:grid; place-items:center; }
 }
 .page h1{ font-size: clamp(26px, 4.6vw, 38px); margin: 6px 0 14px; }
 
+.lead{ color: var(--muted); max-width: 900px; }
+
 .cards{
   display:grid; gap: 18px;
   grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
@@ -102,5 +105,79 @@ footer{
   text-align:center;
   color: var(--muted);
   font-size: 14px;
+  padding: 22px 12px 26px;
+}
+
+/* ===== Migliorie mobile ===== */
+body { overflow-x: hidden; }
+
+.nav-check { display: none; }
+.nav-burger { display: none; }
+
+@media (max-width: 860px) {
+  .nav { padding: 14px 16px; gap: 10px; }
+  .logo { font-size: 1rem; }
+
+  /* Burger su mobile */
+  .nav-burger{
+    display: block;
+    font-size: 26px;
+    line-height: 1;
+    padding: 8px 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    color: var(--text);
+    user-select: none;
+  }
+  .nav-burger:active { background: #ffffff6d; }
+
+  /* Menù a pannello */
+  .nav-links{
+    position: fixed;
+    top: 64px;
+    right: 12px;
+    left: 12px;
+    display: none;               /* chiuso di default */
+    flex-direction: column;
+    gap: 6px;
+    background: #fff;
+    border-radius: 14px;
+    padding: 12px;
+    box-shadow: var(--shadow);
+    z-index: 20;
+  }
+  .nav-links a{
+    display: block;
+    padding: 12px 14px;
+    border-radius: 10px;
+    color: var(--text);
+  }
+  .nav-links a:hover,
+  .nav-links a.active { background: #f3f7f6; }
+
+  /* Apertura quando il checkbox è attivo */
+  .nav-check:checked ~ .nav-links { display: flex; }
+
+  main { min-height: auto; }
+  .hero{ padding: 22px 16px 48px; }
+  .hero h1{ margin-bottom: 8px; }
+  .hero p{ line-height: 1.5; }
+
+  .cta-button{
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .page{ padding: 24px 16px 60px; }
+  .cards{ grid-template-columns: 1fr; gap: 14px; }
+
+  footer{ padding: 18px 12px 22px; font-size: 13px; }
+}
+
+@media (max-width: 380px){
+  .logo{ font-size: .95rem; }
+  .hero p{ font-size: 15px; }
+}
+
   padding: 22px 12px 26px;
 }
