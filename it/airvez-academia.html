@@ -11,75 +11,64 @@
 
   <!-- ====================== STILE LOCALE TABELLE (NO SCROLL) ====================== -->
 <style>
-  /* ====== TABELLE PREZZI – DESKTOP ELEGANTE, MOBILE SENZA SCROLL ====== */
+  /* ====== TABELLE PREZZI – MOBILE SENZA SCROLL, DESKTOP PULITO ====== */
 
   .pricing{
     width:100%;
-    border-collapse:separate;
-    border-spacing:0;
-    table-layout:fixed;             /* ✅ colonne stabili (usiamo <colgroup>) */
+    border-collapse:collapse;
+    table-layout:auto;           /* ✅ naturale, niente barre */
   }
-
   .pricing th,
   .pricing td{
-    padding:14px 16px;
+    padding:12px 14px;
     text-align:left;
     vertical-align:top;
-    word-break: normal;
-    white-space: normal;
+    word-break:normal;           /* ✅ nessuna spezzatura brutta */
+    overflow-wrap:normal;
+    white-space:normal;
     line-height:1.35;
   }
-
-  /* Header con fondo e bordo inferiore */
   .pricing thead th{
-    background:#f3faf7;
+    background:#f5faf9;
     color:var(--text);
-    border-bottom:1px solid #e5efeb;
+    border-bottom:1px solid #e6efed;
     font-weight:700;
   }
-
-  /* Separatori riga morbidi */
-  .pricing tbody tr:not(:last-child) td{
-    border-bottom:1px solid #edf4f2;
+  .pricing tbody td{
+    border-bottom:1px solid #eef5f3;
+    color:var(--muted);
   }
 
-  /* Prima colonna (Opzione) più compatta, niente spezzatura brutta */
-  .pricing td:nth-child(1),
-  .pricing th:nth-child(1){
-    white-space:nowrap;
+  .price-badge{ font-weight:800; color:var(--text); white-space:nowrap; }
+  .pill{ display:inline-block; padding:4px 10px; border-radius:999px; background:#e7faf5; color:var(--accent-2); font-size:12px; margin-left:10px; white-space:nowrap; }
+
+  /* ====== DESKTOP (≥ 601px) ======
+     - “Opzione” e “Prezzo” NON vanno a capo
+     - “Dettagli” può andare a capo */
+  @media (min-width:601px){
+    .pricing th:nth-child(1),
+    .pricing td:nth-child(1){         /* Opzione */
+      white-space:nowrap;             /* ✅ niente a capo */
+    }
+    .pricing th:nth-child(3),
+    .pricing td:nth-child(3){         /* Prezzo */
+      white-space:nowrap;             /* ✅ prezzo + pill sulla stessa riga */
+      text-align:right;
+      width:1%;                       /* stringe la colonna al minimo */
+    }
   }
 
-  /* Prezzo a destra con pill sulla stessa riga */
-  .pricing td:nth-child(3){
-    text-align:right;
-  }
-  .pricing td:nth-child(3) .price-line{
-    display:inline-flex;            /* ✅ prezzo + pill IN LINEA */
-    align-items:center;
-    gap:10px;
-    white-space:nowrap;
-  }
-
-  .price-badge{ font-weight:800; color:var(--text); letter-spacing:.2px; }
-  .pill{
-    display:inline-block; padding:4px 10px; border-radius:999px;
-    background:#e7faf5; color:var(--accent-2); font-size:12px;
-  }
-
-  /* Hover riga (desktop) per un tocco di UI */
-  @media (hover:hover){
-    .pricing tbody tr:hover td{ background:#fbfefd; }
-  }
-
-  /* ====== MOBILE ≤ 600px: righe a scheda, nessuna info tagliata ====== */
+  /* ====== MOBILE (≤ 600px) – versione “a scheda”, zero scroll ======
+     Usa i data-label già presenti: nessuna info si perde. */
   @media (max-width:600px){
-    .pricing{ table-layout:auto; }
     .pricing thead{ display:none; }
     .pricing tr{
       display:block;
-      margin:0 0 16px;
+      margin-bottom:16px;
       padding-bottom:10px;
       border-bottom:1px solid #e9f2f0;
+      background:#fff;
+      border-radius:12px;
     }
     .pricing td{
       display:block;
@@ -94,8 +83,6 @@
       color:var(--text);
       margin-bottom:4px;
     }
-    /* prezzo su riga propria */
-    .pricing td:nth-child(3){ text-align:left; }
   }
 </style>
   <!-- ============================================================================ -->
