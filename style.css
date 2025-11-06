@@ -42,8 +42,8 @@ header{ position:sticky; top:0; z-index:50; background:#fff; backdrop-filter:sat
 }
 .logo{ font-weight:700; font-size: 1.15rem; color: var(--text); text-decoration:none; transition:opacity .18s ease; }
 
-/* ✅ quando il menu è aperto su mobile, nascondi il logo per non “restare appeso” */
-.is-nav-open .logo{ opacity: 0; pointer-events: none; }
+/* ✅ mantieni sempre visibile il logo anche con menu aperto */
+.is-nav-open .logo{ opacity:1; pointer-events:auto; }
 
 .nav-links{
   list-style:none;
@@ -106,28 +106,29 @@ footer{ text-align:center; color: var(--muted); font-size: 14px; padding: 22px 1
 .nav-check { display:none; }
 
 @media (max-width: 900px){
-  .nav-burger{
-    display:inline-block; cursor:pointer; user-select:none;
-    font-size:28px; padding:8px 12px; background:transparent; border:none;
-  }
 
-  /* chiuso di default */
-  .nav-links{
-    display:none;
-    width:100%;
-    flex-direction:column; align-items:flex-start;
-    gap:12px; padding:14px 18px;
-    background:#fff; border-top:1px solid #ddd;
-    box-shadow:0 8px 20px -12px rgba(0,0,0,.15);
+  /* barra in alto invariata con logo + burger */
+  .nav{ align-items:center; }
 
-    /* ✅ animazione “slide-down” morbida all’apertura */
-    animation: none;
-  }
-
-  /* aperto */
+  /* pannello menu che si apre SOTTO la barra */
   #nav-check:checked ~ .nav-links{
     display:flex;
+    margin-top: 8px;                 /* ✅ stacco sotto la barra */
+    border-radius: 12px;
+    box-shadow: 0 12px 28px -12px rgba(0,0,0,.18);
     animation: navDrop .22s ease-out both;
+  }
+
+  /* voci del menu */
+  .nav-links{
+    width:100%;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:12px;
+    padding:14px 18px;
+    background:#fff;
+    border-top:1px solid #ddd;
+    box-shadow:0 8px 20px -12px rgba(0,0,0,.15);
   }
 
   .nav-links a{ padding:8px 0; font-size:18px; }
