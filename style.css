@@ -103,24 +103,27 @@ footer{ text-align:center; color: var(--muted); font-size: 14px; padding: 22px 1
 
 /* ========== Toggle menu mobile (≤ 900px) ========== */
 .nav-burger{ display:none; }      /* nascosto su desktop */
-.nav-check { display:none; }
+.nav-check  { display:none; }
 
 @media (max-width: 900px){
+
+  /* ✅ mostra burger su mobile */
+  .nav-burger{
+    display:block;
+    font-size:28px;
+    padding:8px 12px;
+    background:transparent;
+    border:none;
+    cursor:pointer;
+    user-select:none;
+  }
 
   /* barra in alto invariata con logo + burger */
   .nav{ align-items:center; }
 
-  /* pannello menu che si apre SOTTO la barra */
-  #nav-check:checked ~ .nav-links{
-    display:flex;
-    margin-top: 8px;                 /* ✅ stacco sotto la barra */
-    border-radius: 12px;
-    box-shadow: 0 12px 28px -12px rgba(0,0,0,.18);
-    animation: navDrop .22s ease-out both;
-  }
-
-  /* voci del menu */
+  /* ✅ di default il pannello menu è chiuso su mobile */
   .nav-links{
+    display:none;
     width:100%;
     flex-direction:column;
     align-items:flex-start;
@@ -131,17 +134,27 @@ footer{ text-align:center; color: var(--muted); font-size: 14px; padding: 22px 1
     box-shadow:0 8px 20px -12px rgba(0,0,0,.15);
   }
 
+  /* ✅ pannello menu che si apre SOTTO la barra */
+  #nav-check:checked ~ .nav-links{
+    display:flex;
+    margin-top:8px;                /* stacco sotto la barra */
+    border-radius:12px;
+    box-shadow:0 12px 28px -12px rgba(0,0,0,.18);
+    animation: navDrop .22s ease-out both;
+  }
+
   .nav-links a{ padding:8px 0; font-size:18px; }
 }
 
 /* ✅ keyframes dell’animazione di apertura menu */
 @keyframes navDrop{
-  from{ opacity:.0; transform: translateY(-8px); }
-  to  { opacity:1;  transform: translateY(0); }
+  from{ opacity:0; transform: translateY(-8px); }
+  to  { opacity:1; transform: translateY(0); }
 }
 
 /* iOS safe area per header sticky */
 @supports (padding-top: env(safe-area-inset-top)){
   header{ padding-top: env(safe-area-inset-top); }
 }
+
 
