@@ -188,22 +188,33 @@ body { overflow-x: hidden; }
       backdrop-filter:saturate(1.1) blur(6px); }
 .nav .logo{ font-weight:700; }
 .nav-links{ display:flex; align-items:center; gap:12px; margin-left:auto; flex-wrap:wrap; }
-.lang-switch{ display:flex; gap:8px; align-items:center; flex-wrap:nowrap; }
-.lang-switch a{ display:inline-flex; align-items:center; gap:6px; padding:.38rem .62rem; }
-
-/* Calendly sempre a misura giusta */
-.calendly-inline-widget{ width:100%; min-width:0; height:800px; }
-@media (max-width: 900px){
-  .page{ padding:24px 16px; }
+/* === LANGUAGE SWITCH FLAGS === */
+.lang-switch {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-end;
 }
-@media (max-width: 720px){
-  /* nav compatta: niente divider verticale e niente wrap brutti */
-  .nav-links{ gap:10px; flex-wrap:wrap; }
-  .nav-divider{ display:none; }
-  /* nelle pillole lingua, su mobile teniamo solo la bandiera (target più grande) */
-  .lang-switch .label{ display:none; }
-  .lang-switch a{ padding:.42rem .48rem; border-radius:999px; }
-  .lang-switch .flag{ font-size:18px; line-height:1; }
+
+.lang-switch a {
+  font-size: 22px;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 4px 6px;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.lang-switch a:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 0 3px rgba(14,165,233,0.25);
+}
+
+.lang-switch a.is-active {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 3px rgba(14,165,233,0.4);
+  background-color: rgba(14,165,233,0.1);
+}
+
   /* Calendly: occupa lo schermo sotto l’header */
   .calendly-inline-widget{ height: calc(100vh - 120px); }
 }
