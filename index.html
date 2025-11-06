@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Air Vez</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>
+    (function () {
+      // 1) normalizza l'host: togli "www."
+      var host = location.host.replace(/^www\./, '');
+      // 2) costruisci l'URL finale in HTTPS verso /it
+      var target = 'https://' + host + '/it/index.html';
+      // 3) redireziona in modo robusto
+      if (location.href !== target) location.replace(target);
+    })();
+  </script>
+  <!-- fallback per browser molto vecchi -->
+  <meta http-equiv="refresh" content="0; url=/it/index.html" />
+</head>
+<body></body>
+</html>
