@@ -10,81 +10,84 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
   <!-- ====================== STILE LOCALE TABELLE (NO SCROLL) ====================== -->
-<style>
-  /* ====== TABELLE PREZZI – MOBILE SENZA SCROLL, DESKTOP PULITO ====== */
+  <style>
+    /* ====== TABELLE PREZZI – MOBILE SENZA SCROLL, DESKTOP PULITO ====== */
 
-  .pricing{
-    width:100%;
-    border-collapse:collapse;
-    table-layout:auto;           /* ✅ naturale, niente barre */
-  }
-  .pricing th,
-  .pricing td{
-    padding:12px 14px;
-    text-align:left;
-    vertical-align:top;
-    word-break:normal;           /* ✅ nessuna spezzatura brutta */
-    overflow-wrap:normal;
-    white-space:normal;
-    line-height:1.35;
-  }
-  .pricing thead th{
-    background:#f5faf9;
-    color:var(--text);
-    border-bottom:1px solid #e6efed;
-    font-weight:700;
-  }
-  .pricing tbody td{
-    border-bottom:1px solid #eef5f3;
-    color:var(--muted);
-  }
-
-  .price-badge{ font-weight:800; color:var(--text); white-space:nowrap; }
-  .pill{ display:inline-block; padding:4px 10px; border-radius:999px; background:#e7faf5; color:var(--accent-2); font-size:12px; margin-left:10px; white-space:nowrap; }
-
-  /* ====== DESKTOP (≥ 601px) ======
-     - “Opzione” e “Prezzo” NON vanno a capo
-     - “Dettagli” può andare a capo */
-  @media (min-width:601px){
-    .pricing th:nth-child(1),
-    .pricing td:nth-child(1){         /* Opzione */
-      white-space:nowrap;             /* ✅ niente a capo */
+    .pricing{
+      width:100%;
+      border-collapse:collapse;
+      table-layout:auto;                 /* naturale, niente barre */
     }
-    .pricing th:nth-child(3),
-    .pricing td:nth-child(3){         /* Prezzo */
-      white-space:nowrap;             /* ✅ prezzo + pill sulla stessa riga */
-      text-align:right;
-      width:1%;                       /* stringe la colonna al minimo */
-    }
-  }
-
-  /* ====== MOBILE (≤ 600px) – versione “a scheda”, zero scroll ======
-     Usa i data-label già presenti: nessuna info si perde. */
-  @media (max-width:600px){
-    .pricing thead{ display:none; }
-    .pricing tr{
-      display:block;
-      margin-bottom:16px;
-      padding-bottom:10px;
-      border-bottom:1px solid #e9f2f0;
-      background:#fff;
-      border-radius:12px;
-    }
+    .pricing th,
     .pricing td{
-      display:block;
-      padding:8px 0;
+      padding:12px 14px;
       text-align:left;
+      vertical-align:top;
+      word-break:normal;                 /* nessuna spezzatura brutta */
+      overflow-wrap:normal;
       white-space:normal;
+      line-height:1.35;
     }
-    .pricing td::before{
-      content: attr(data-label);
-      display:block;
-      font-weight:600;
+    .pricing thead th{
+      background:#f5faf9;
       color:var(--text);
-      margin-bottom:4px;
+      border-bottom:1px solid #e6efed;
+      font-weight:700;
     }
-  }
-</style>
+    .pricing tbody td{
+      border-bottom:1px solid #eef5f3;
+      color:var(--muted);
+    }
+
+    .price-badge{ font-weight:800; color:var(--text); white-space:nowrap; }
+    .pill{ display:inline-block; padding:4px 10px; border-radius:999px; background:#e7faf5; color:var(--accent-2); font-size:12px; margin-left:10px; white-space:nowrap; }
+    .price-line{ display:inline-flex; align-items:center; gap:8px; }
+
+    /* ====== DESKTOP (≥ 601px)
+       - “Opzione” e “Prezzo” NON vanno a capo
+       - “Dettagli” può andare a capo */
+    @media (min-width:601px){
+      .pricing th:nth-child(1),
+      .pricing td:nth-child(1){          /* Opzione */
+        white-space:nowrap;
+      }
+      .pricing th:nth-child(3),
+      .pricing td:nth-child(3){          /* Prezzo */
+        white-space:nowrap;
+        text-align:right;
+        width:1%;                        /* stringe la colonna al minimo */
+      }
+    }
+
+    /* ====== MOBILE (≤ 600px) – versione “a scheda”, zero scroll
+       Usa i data-label: nessuna info si perde */
+    @media (max-width:600px){
+      .pricing thead{ display:none; }
+      .pricing tr{
+        display:block;
+        margin-bottom:16px;
+        padding:10px 12px;
+        border:1px solid #e9f2f0;
+        background:#fff;
+        border-radius:12px;
+        box-shadow:0 6px 18px -10px rgba(0,0,0,.08);
+      }
+      .pricing td{
+        display:block;
+        padding:8px 0;
+        text-align:left;
+        white-space:normal;
+        border-bottom:none;
+      }
+      .pricing td::before{
+        content: attr(data-label);
+        display:block;
+        font-weight:600;
+        color:var(--text);
+        margin-bottom:4px;
+      }
+    }
+  </style>
   <!-- ============================================================================ -->
 </head>
 <body>
@@ -157,16 +160,6 @@
       <article class="card">
         <h3>Lingue (Italiano / Spagnolo)</h3>
         <table class="pricing">
-      
-  <colgroup>
-    <col style="width:30%">   <!-- Opzione -->
-    <col style="width:auto">  <!-- Dettagli -->
-    <col style="width:1%">    <!-- Prezzo -->
-  </colgroup>
-  <thead>…</thead>
-  <tbody>…</tbody>
-</table>
-
           <thead>
             <tr>
               <th scope="col">Opzione</th>
@@ -178,17 +171,31 @@
             <tr>
               <td data-label="Opzione">Lezione singola</td>
               <td data-label="Dettagli">60 minuti • 1-to-1 • materiale incluso</td>
-              <td data-label="Prezzo"><span class="price-line"><span class="price-badge">15 € / h</span></td>
+              <td data-label="Prezzo">
+                <span class="price-line">
+                  <span class="price-badge">15 € / h</span>
+                </span>
+              </td>
             </tr>
             <tr>
               <td data-label="Opzione">Pacchetto 10 ore</td>
               <td data-label="Dettagli">Orari flessibili • valido 3 mesi</td>
-              <td data-label="Prezzo"><span class="price-line"><span class="price-badge">135 €</span> <span class="pill">-10%</span></td>
+              <td data-label="Prezzo">
+                <span class="price-line">
+                  <span class="price-badge">135 €</span>
+                  <span class="pill">-10%</span>
+                </span>
+              </td>
             </tr>
             <tr>
               <td data-label="Opzione">Pacchetto 20 ore</td>
               <td data-label="Dettagli">Orari flessibili • valido 6 mesi</td>
-              <td data-label="Prezzo"><span class="price-line"><span class="price-badge">255 €</span> <span class="pill">-15%</span></td>
+              <td data-label="Prezzo">
+                <span class="price-line">
+                  <span class="price-badge">255 €</span>
+                  <span class="pill">-15%</span>
+                </span>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -198,16 +205,6 @@
       <article class="card">
         <h3>STEM (Matematica / Fisica / Chimica)</h3>
         <table class="pricing">
-    
-  <colgroup>
-    <col style="width:30%">   <!-- Opzione -->
-    <col style="width:auto">  <!-- Dettagli -->
-    <col style="width:1%">    <!-- Prezzo -->
-  </colgroup>
-  <thead>…</thead>
-  <tbody>…</tbody>
-</table>
-
           <thead>
             <tr>
               <th scope="col">Opzione</th>
@@ -219,17 +216,31 @@
             <tr>
               <td data-label="Opzione">Lezione singola</td>
               <td data-label="Dettagli">60 minuti • 1-to-1 • esercizi e correzioni</td>
-              <td data-label="Prezzo"><span class="price-badge">15 € / h</span></td>
+              <td data-label="Prezzo">
+                <span class="price-line">
+                  <span class="price-badge">15 € / h</span>
+                </span>
+              </td>
             </tr>
             <tr>
               <td data-label="Opzione">Pacchetto 10 ore</td>
               <td data-label="Dettagli">Programma personalizzato • valido 3 mesi</td>
-              <td data-label="Prezzo"><span class="price-badge">135 €</span> <span class="pill">-10%</span></td>
+              <td data-label="Prezzo">
+                <span class="price-line">
+                  <span class="price-badge">135 €</span>
+                  <span class="pill">-10%</span>
+                </span>
+              </td>
             </tr>
             <tr>
               <td data-label="Opzione">Pacchetto 20 ore</td>
               <td data-label="Dettagli">Preparazione prove/esami • valido 6 mesi</td>
-              <td data-label="Prezzo"><span class="price-badge">255 €</span> <span class="pill">-15%</span></td>
+              <td data-label="Prezzo">
+                <span class="price-line">
+                  <span class="price-badge">255 €</span>
+                  <span class="pill">-15%</span>
+                </span>
+              </td>
             </tr>
           </tbody>
         </table>
