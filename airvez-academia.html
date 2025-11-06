@@ -3,9 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Air Vez Academia</title>
+  <title>Air Vez Academia – Italiano, Spagnolo & STEM</title>
   <link rel="stylesheet" href="style.css?v=6" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <!-- Piccolo stile locale per le tabelle prezzi (non richiede modifiche al tuo style.css) -->
+  <style>
+    .pricing { width: 100%; border-collapse: collapse; }
+    .pricing th, .pricing td { padding: 10px 12px; text-align: left; }
+    .pricing thead th { background: #f5faf9; color: var(--text); border-bottom: 1px solid #e6efed; }
+    .pricing tbody td { border-bottom: 1px solid #eef5f3; color: var(--muted); }
+    .price-badge { font-weight:700; color: var(--text); }
+    .pill { display:inline-block; padding:4px 10px; border-radius:999px; background:#e7faf5; color:var(--accent-2); font-size:12px; }
+    .list { margin: 10px 0 0; padding-left: 18px; }
+    .list li { margin: 6px 0; color: var(--muted); }
+    .cta-inline { margin-top:14px; display:inline-block; }
+  </style>
 </head>
 <body>
   <header>
@@ -28,24 +41,111 @@
   <main class="page">
     <h1>Air Vez Academia</h1>
     <p class="lead">
-      Formazione pratica per viaggiatori e creatori: strumenti concreti per muoverti,
-      raccontare e lavorare ovunque nel mondo.
+      Lezioni 1-to-1 online (o ibride su richiesta) per imparare <strong>Italiano</strong> e <strong>Spagnolo</strong> a tutti i livelli (A1–C2) e per migliorare in
+      <strong>Matematica</strong>, <strong>Fisica</strong> e <strong>Chimica</strong>. Approccio pratico, materiale mirato, orari flessibili.
     </p>
 
     <div class="cards">
       <article class="card">
-        <h3>Workshop sul campo</h3>
-        <p>Riprese con smartphone, storytelling, sicurezza e logistica in viaggio.</p>
+        <h3>Lingue: Italiano &amp; Spagnolo</h3>
+        <p>Programmi su misura basati sul Quadro Comune Europeo (CEFR).</p>
+        <ul class="list">
+          <li><span class="pill">Livelli</span> A1 • A2 • B1 • B2 • C1 • C2</li>
+          <li><span class="pill">Focus</span> conversazione, grammatica, ascolto/lettura, scrittura, preparazione certificazioni</li>
+          <li><span class="pill">Incluso</span> test di livello iniziale, materiali, compiti con feedback</li>
+        </ul>
       </article>
+
       <article class="card">
-        <h3>Live online</h3>
-        <p>Sessioni interattive su pianificazione, budget, attrezzatura e editing.</p>
+        <h3>STEM: Matematica, Fisica, Chimica</h3>
+        <p>Ripetizioni e potenziamento per scuola, università e test d’ingresso.</p>
+        <ul class="list">
+          <li><span class="pill">Metodo</span> spiegazioni chiare + esercizi guidati + strategie d’esame</li>
+          <li><span class="pill">Argomenti</span> algebra, analisi, trigonometria, meccanica, elettromagnetismo, stechiometria…</li>
+          <li><span class="pill">Supporto</span> file riassuntivi e schemi per ripassare rapidamente</li>
+        </ul>
       </article>
+
       <article class="card">
-        <h3>1-to-1</h3>
-        <p>Mentoring personalizzato: obiettivi, piano d’azione, accountability.</p>
+        <h3>Come funziona</h3>
+        <ul class="list">
+          <li><strong>1) Conosciamoci:</strong> breve call o messaggio per obiettivi e livello.</li>
+          <li><strong>2) Piano su misura:</strong> calendario flessibile (mattina/sera, fuso orario ok).</li>
+          <li><strong>3) Lezioni:</strong> live su Google Meet/Zoom + materiale condiviso.</li>
+        </ul>
+        <a class="cta-button cta-inline" href="contatti.html">Prenota una prova</a>
       </article>
     </div>
+
+    <h2 style="margin-top:28px">Prezzi</h2>
+    <div class="cards">
+      <article class="card">
+        <h3>Lingue (Italiano / Spagnolo)</h3>
+        <table class="pricing">
+          <thead>
+            <tr>
+              <th>Opzione</th>
+              <th>Dettagli</th>
+              <th>Prezzo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Lezione singola</td>
+              <td>60 minuti • 1-to-1 • materiale incluso</td>
+              <td><span class="price-badge">15 € / h</span></td>
+            </tr>
+            <tr>
+              <td>Pacchetto 10 ore</td>
+              <td>Orari flessibili • valido 3 mesi</td>
+              <td><span class="price-badge">135 €</span> <span class="pill">-10%</span></td>
+            </tr>
+            <tr>
+              <td>Pacchetto 20 ore</td>
+              <td>Orari flessibili • valido 6 mesi</td>
+              <td><span class="price-badge">255 €</span> <span class="pill">-15%</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <a class="cta-button cta-inline" href="contatti.html">Inizia con le lingue</a>
+      </article>
+
+      <article class="card">
+        <h3>STEM (Matematica / Fisica / Chimica)</h3>
+        <table class="pricing">
+          <thead>
+            <tr>
+              <th>Opzione</th>
+              <th>Dettagli</th>
+              <th>Prezzo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Lezione singola</td>
+              <td>60 minuti • 1-to-1 • esercizi e correzioni</td>
+              <td><span class="price-badge">15 € / h</span></td>
+            </tr>
+            <tr>
+              <td>Pacchetto 10 ore</td>
+              <td>Programma personalizzato • valido 3 mesi</td>
+              <td><span class="price-badge">135 €</span> <span class="pill">-10%</span></td>
+            </tr>
+            <tr>
+              <td>Pacchetto 20 ore</td>
+              <td>Preparazione prove/esami • valido 6 mesi</td>
+              <td><span class="price-badge">255 €</span> <span class="pill">-15%</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <a class="cta-button cta-inline" href="contatti.html">Inizia con le STEM</a>
+      </article>
+    </div>
+
+    <p class="lead" style="margin-top:18px">
+      * Le tariffe si intendono per studente. Fatturazione semplice; possibilità di lezione di prova breve gratuita.
+      Scrivici per gruppi, esigenze specifiche o percorsi intensivi.
+    </p>
   </main>
 
   <footer>
