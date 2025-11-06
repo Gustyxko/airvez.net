@@ -181,3 +181,33 @@ body { overflow-x: hidden; }
 
   padding: 22px 12px 26px;
 }
+/* --- layout solido desktop + mobile --- */
+.page{ max-width:1100px; margin:0 auto; padding:clamp(20px,2.8vw,32px) clamp(14px,2vw,20px); }
+.nav{ position:sticky; top:0; z-index:50; background:#fff;
+      padding:12px 16px; display:flex; align-items:center; gap:12px;
+      backdrop-filter:saturate(1.1) blur(6px); }
+.nav .logo{ font-weight:700; }
+.nav-links{ display:flex; align-items:center; gap:12px; margin-left:auto; flex-wrap:wrap; }
+.lang-switch{ display:flex; gap:8px; align-items:center; flex-wrap:nowrap; }
+.lang-switch a{ display:inline-flex; align-items:center; gap:6px; padding:.38rem .62rem; }
+
+/* Calendly sempre a misura giusta */
+.calendly-inline-widget{ width:100%; min-width:0; height:800px; }
+@media (max-width: 900px){
+  .page{ padding:24px 16px; }
+}
+@media (max-width: 720px){
+  /* nav compatta: niente divider verticale e niente wrap brutti */
+  .nav-links{ gap:10px; flex-wrap:wrap; }
+  .nav-divider{ display:none; }
+  /* nelle pillole lingua, su mobile teniamo solo la bandiera (target più grande) */
+  .lang-switch .label{ display:none; }
+  .lang-switch a{ padding:.42rem .48rem; border-radius:999px; }
+  .lang-switch .flag{ font-size:18px; line-height:1; }
+  /* Calendly: occupa lo schermo sotto l’header */
+  .calendly-inline-widget{ height: calc(100vh - 120px); }
+}
+/* supporto notch iOS per l’header sticky */
+@supports (padding-top: env(safe-area-inset-top)){
+  .nav{ padding-top: calc(12px + env(safe-area-inset-top)); }
+}
