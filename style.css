@@ -211,3 +211,11 @@ body { overflow-x: hidden; }
 @supports (padding-top: env(safe-area-inset-top)){
   .nav{ padding-top: calc(12px + env(safe-area-inset-top)); }
 }
+/* Chiudi il menu mobile (checkbox) dopo il click su un link */
+(function(){
+  const cb = document.getElementById('nav-check');
+  if(!cb) return;
+  document.querySelectorAll('#mainnav a').forEach(a=>{
+    a.addEventListener('click', ()=>{ cb.checked = false; });
+  });
+})();
