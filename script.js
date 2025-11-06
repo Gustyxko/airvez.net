@@ -1,6 +1,6 @@
 /* =================== UTILITÀ GLOBALI =================== */
 
-/* ✅ Evidenzia la lingua attiva in base al path (/it, /en, /es) */
+/* Evidenzia la lingua attiva in base al path (/it, /en, /es) */
 (function(){
   const current = (location.pathname.split('/')[1] || 'it').toLowerCase();
   document.querySelectorAll('.lang-switch a').forEach(a=>{
@@ -11,11 +11,14 @@
   });
 })();
 
-/* ✅ Effetto reveal (se in futuro userai class="reveal") */
+/* Effetto reveal (se in futuro userai class="reveal") */
 (function(){
   const els = document.querySelectorAll('.reveal');
   if(!els.length) return;
-  if(!('IntersectionObserver' in window)){ els.forEach(el=>el.classList.add('in')); return; }
+  if(!('IntersectionObserver' in window)){
+    els.forEach(el=>el.classList.add('in'));
+    return;
+  }
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{
       if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
@@ -31,8 +34,7 @@
   const burger = document.querySelector('.nav-burger');  // label
   if(!cb || !nav || !burger) return;
 
-  /* ✅ aggiunge/rimuove classe sul body per nascondere il logo
-        (risolve il “logo appeso” quando il menu è aperto) */
+  // ✅ sincronizza stato sul body (solo per eventuali stili) + aria-expanded
   const syncBodyClass = () => {
     document.body.classList.toggle('is-nav-open', cb.checked);
     burger.setAttribute('aria-expanded', cb.checked ? 'true' : 'false');
@@ -40,21 +42,20 @@
   cb.addEventListener('change', syncBodyClass);
   syncBodyClass();
 
-  /* ✅ chiude quando clicchi un link del menu */
+  // ✅ chiudi quando clicchi un link del menu
   nav.querySelectorAll('a').forEach(a=>{
     a.addEventListener('click', ()=>{ cb.checked = false; syncBodyClass(); }, {passive:true});
   });
 
-  /* ✅ chiude cliccando fuori dal menu */
+  // ✅ chiudi cliccando fuori
   document.addEventListener('click',(e)=>{
     if(!cb.checked) return;
     const inside = nav.contains(e.target) || burger.contains(e.target) || e.target === cb;
     if(!inside){ cb.checked = false; syncBodyClass(); }
   }, {passive:true});
 
-  /* ✅ chiude con ESC (desktop) */
+  // ✅ chiudi con ESC
   document.addEventListener('keydown',(e)=>{
     if(e.key === 'Escape'){ cb.checked = false; syncBodyClass(); }
   });
 })();
-
