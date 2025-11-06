@@ -2,7 +2,7 @@
 * { box-sizing: border-box; }
 html, body { height: 100%; margin: 0; padding: 0; }
 html, body, h1, h2, h3, p, a, nav, header, main, footer, section, ul, li, div {
-  writing-mode: horizontal-tb !important;
+  writing-mode: horizontal-tb !important;  /* evita rendering verticale su alcuni browser */
   text-orientation: mixed !important;
   transform: none !important;
 }
@@ -21,6 +21,7 @@ body { overflow-x: hidden; }
   --radius:18px;
 }
 
+/* ========== Base ========== */
 body{
   font-family: "Poppins",system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
   color: var(--text);
@@ -29,7 +30,7 @@ body{
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ========== Navbar (desktop base) ========== */
+/* ========== Header / Navbar ========== */
 header{ position:sticky; top:0; z-index:50; background:#fff; backdrop-filter:saturate(1.1) blur(6px); }
 .nav{
   max-width: 1100px;
@@ -39,11 +40,14 @@ header{ position:sticky; top:0; z-index:50; background:#fff; backdrop-filter:sat
   align-items: center;
   gap: 12px;
 }
-.logo{ font-weight:700; font-size: 1.15rem; color: var(--text); text-decoration:none; }
+.logo{ font-weight:700; font-size: 1.15rem; color: var(--text); text-decoration:none; transition:opacity .18s ease; }
+
+/* ✅ quando il menu è aperto su mobile, nascondi il logo per non “restare appeso” */
+.is-nav-open .logo{ opacity: 0; pointer-events: none; }
 
 .nav-links{
   list-style:none;
-  display:flex;            /* desktop: visibile e in riga */
+  display:flex;                 /* desktop: visibile e in riga */
   gap: 12px;
   margin:0 0 0 auto;
   padding:0;
@@ -59,29 +63,14 @@ header{ position:sticky; top:0; z-index:50; background:#fff; backdrop-filter:sat
 .nav-links a:hover,
 .nav-links a.active{ background:#ffffff8f; color:var(--text); }
 
-/* Language switch – solo bandiere */
-.lang-switch {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  justify-content: flex-end;
-}
+/* === Lingue: solo bandiere === */
+.lang-switch{ display:flex; gap:10px; align-items:center; }
 .lang-switch a{
-  font-size: 22px;
-  text-decoration: none;
-  border-radius: 8px;
-  padding: 4px 6px;
+  font-size:22px; text-decoration:none; border-radius:8px; padding:4px 6px;
   transition: transform .15s ease, box-shadow .15s ease;
 }
-.lang-switch a:hover {
-  transform: scale(1.15);
-  box-shadow: 0 0 0 3px rgba(14,165,233,0.25);
-}
-.lang-switch a.is-active {
-  transform: scale(1.2);
-  box-shadow: 0 0 0 3px rgba(14,165,233,0.4);
-  background-color: rgba(14,165,233,0.1);
-}
+.lang-switch a:hover{ transform:scale(1.15); box-shadow:0 0 0 3px rgba(14,165,233,.25); }
+.lang-switch a.is-active{ transform:scale(1.2); box-shadow:0 0 0 3px rgba(14,165,233,.4); background:rgba(14,165,233,.08); }
 
 /* ========== Hero (home) ========== */
 main{ min-height: calc(100dvh - 120px); display:grid; place-items:center; }
@@ -103,6 +92,7 @@ main{ min-height: calc(100dvh - 120px); display:grid; place-items:center; }
 .page h1{ font-size: clamp(26px, 4.6vw, 38px); margin: 6px 0 14px; }
 .lead{ color: var(--muted); max-width: 900px; }
 
+/* Cards utili per future sezioni */
 .cards{ display:grid; gap:18px; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); margin-top:16px; }
 .card{ background: var(--card); border-radius: var(--radius); padding: 18px 18px 16px; box-shadow: var(--shadow); }
 .card h3{ margin: 4px 0 8px; }
@@ -120,21 +110,37 @@ footer{ text-align:center; color: var(--muted); font-size: 14px; padding: 22px 1
     display:inline-block; cursor:pointer; user-select:none;
     font-size:28px; padding:8px 12px; background:transparent; border:none;
   }
+
+  /* chiuso di default */
   .nav-links{
-    display:none;                 /* chiuso di default */
+    display:none;
     width:100%;
     flex-direction:column; align-items:flex-start;
     gap:12px; padding:14px 18px;
     background:#fff; border-top:1px solid #ddd;
     box-shadow:0 8px 20px -12px rgba(0,0,0,.15);
+
+    /* ✅ animazione “slide-down” morbida all’apertura */
+    animation: none;
   }
-  #nav-check:checked ~ .nav-links{ display:flex; }  /* aperto */
+
+  /* aperto */
+  #nav-check:checked ~ .nav-links{
+    display:flex;
+    animation: navDrop .22s ease-out both;
+  }
 
   .nav-links a{ padding:8px 0; font-size:18px; }
-  .calendly-inline-widget{ height: calc(100vh - 120px); }
+}
+
+/* ✅ keyframes dell’animazione di apertura menu */
+@keyframes navDrop{
+  from{ opacity:.0; transform: translateY(-8px); }
+  to  { opacity:1;  transform: translateY(0); }
 }
 
 /* iOS safe area per header sticky */
 @supports (padding-top: env(safe-area-inset-top)){
   header{ padding-top: env(safe-area-inset-top); }
 }
+
