@@ -10,58 +10,84 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
   <!-- ====================== STILE LOCALE TABELLE (NO SCROLL) ====================== -->
-  <style>
-    /* ✅ Le tabelle si adattano al contenitore, senza overflow orizzontale */
-    .pricing{
-      width:100%;
-      border-collapse:collapse;
-      table-layout:auto;          /* lascia adattare le colonne al contenuto */
-      word-break:break-word;
-    }
-    .pricing th, .pricing td{
-      padding:10px 12px;
-      text-align:left;
-      vertical-align:top;
-    }
-    .pricing thead th{
-      background:#f5faf9;
-      color:var(--text);
-      border-bottom:1px solid #e6efed;
-      font-weight:600;
-    }
-    .pricing tbody td{
-      border-bottom:1px solid #eef5f3;
-      color:var(--muted);
-    }
-    .price-badge{ font-weight:700; color:var(--text); white-space:nowrap; }
-    .pill{ display:inline-block; padding:4px 10px; border-radius:999px; background:#e7faf5; color:var(--accent-2); font-size:12px; white-space:nowrap; }
-    .list{ margin:10px 0 0; padding-left:18px; }
-    .list li{ margin:6px 0; color:var(--muted); }
-    .cta-inline{ margin-top:14px; display:inline-block; }
+ <style>
+  /* ====== TABELLE PREZZI – DESKTOP LEGGIBILE, MOBILE SENZA SCROLL ====== */
 
-    /* ✅ Mobile: l'intestazione sparisce e ogni cella mostra la propria etichetta (nessuna info tagliata) */
-    @media (max-width:600px){
-      .pricing thead{ display:none; }
-      .pricing tr{
-        display:block;
-        margin-bottom:16px;
-        border-bottom:2px solid #f0f6f4;
-        padding-bottom:8px;
-      }
-      .pricing td{
-        display:block;
-        text-align:left;
-        padding:6px 0;
-      }
-      .pricing td::before{
-        content: attr(data-label);
-        font-weight:600;
-        color:var(--text);
-        display:block;
-        margin-bottom:3px;
-      }
+  .pricing{
+    width:100%;
+    border-collapse:collapse;
+    table-layout:auto;          /* lascia adattare le colonne */
+  }
+
+  .pricing th,
+  .pricing td{
+    padding:10px 12px;
+    text-align:left;
+    vertical-align:top;
+    word-break: normal;         /* ✅ niente spezzatura aggressiva */
+    hyphens: manual;            /* evita sillabazioni automatiche */
+    white-space: normal;
+  }
+
+  .pricing thead th{
+    background:#f5faf9;
+    color:var(--text);
+    border-bottom:1px solid #e6efed;
+    font-weight:600;
+  }
+
+  .pricing tbody td{
+    border-bottom:1px solid #eef5f3;
+    color:var(--muted);
+  }
+
+  .price-badge{ font-weight:700; color:var(--text); white-space:nowrap; }
+  .pill{ display:inline-block; padding:4px 10px; border-radius:999px; background:#e7faf5; color:var(--accent-2); font-size:12px; white-space:nowrap; }
+  .list{ margin:10px 0 0; padding-left:18px; }
+  .list li{ margin:6px 0; color:var(--muted); }
+  .cta-inline{ margin-top:14px; display:inline-block; }
+
+  /* ✅ Larghezze colonnari per desktop: niente “a capo” brutti */
+  .pricing th:nth-child(1),
+  .pricing td:nth-child(1){        /* Opzione */
+    white-space: nowrap;
+    width: 30%;
+  }
+  .pricing th:nth-child(2),
+  .pricing td:nth-child(2){        /* Dettagli */
+    width: auto;                   /* prende lo spazio che resta */
+  }
+  .pricing th:nth-child(3),
+  .pricing td:nth-child(3){        /* Prezzo */
+    white-space: nowrap;
+    width: 1%;
+    text-align: right;
+  }
+
+  /* ====== MOBILE: trasformo le righe in “schede” senza header ====== */
+  @media (max-width:600px){
+    .pricing thead{ display:none; }
+    .pricing tr{
+      display:block;
+      margin-bottom:16px;
+      border-bottom:2px solid #f0f6f4;
+      padding-bottom:8px;
     }
-  </style>
+    .pricing td{
+      display:block;
+      text-align:left;
+      padding:6px 0;
+      white-space: normal;           /* qui posso andare a capo */
+    }
+    .pricing td::before{
+      content: attr(data-label);     /* etichetta della colonna */
+      font-weight:600;
+      color:var(--text);
+      display:block;
+      margin-bottom:3px;
+    }
+  }
+</style>
   <!-- ============================================================================ -->
 </head>
 <body>
