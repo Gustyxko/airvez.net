@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ops! Pagina non trovata — Air Vez</title>
+
+  <!-- evita l'indicizzazione della 404 -->
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- UI coerente con il sito -->
+  <link rel="stylesheet" href="/style.css?v=7">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* micro-stili per la 404, senza toccare il tuo style.css */
+    .oops {
+      text-align:center;
+      max-width:900px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+    .oops h1 {
+      font-size: clamp(30px, 6vw, 56px);
+      margin: 6px 0 10px;
+    }
+    .oops p.lead {
+      font-size: clamp(16px, 2.6vw, 22px);
+      color: var(--muted);
+      margin: 8px 0 22px;
+    }
+    .ghost {
+      font-size: clamp(48px, 10vw, 120px);
+      line-height: 1;
+      display: inline-block;
+      animation: floaty 2.6s ease-in-out infinite;
+      filter: drop-shadow(0 12px 30px rgba(0,0,0,.08));
+      user-select: none;
+    }
+    @keyframes floaty {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+    .btns {
+      display:flex; gap:12px; justify-content:center; flex-wrap:wrap;
+    }
+    .btn {
+      text-decoration:none;
+      padding:12px 18px;
+      border-radius:999px;
+      background: #fff;
+      color: var(--text);
+      box-shadow: var(--shadow);
+      border: 1px solid #e8f2f0;
+    }
+    .btn:hover { background:#f7fffc; }
+    .timer {
+      margin-top: 12px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .small {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 16px;
+    }
+    .lang-switch-404{
+      display:flex; gap:10px; justify-content:center; margin-top:14px;
+    }
+    .lang-switch-404 a{
+      font-size:22px; text-decoration:none; border-radius:8px; padding:4px 6px;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .lang-switch-404 a:hover{ transform:scale(1.15); box-shadow:0 0 0 3px rgba(14,165,233,.25); }
+    .lang-switch-404 a.is-active{ transform:scale(1.2); box-shadow:0 0 0 3px rgba(14,165,233,.4); background:rgba(14,165,233,.08); }
+  </style>
+</head>
+<body>
+  <!-- header/nav uguale al resto del sito -->
+  <header>
+    <nav class="nav" role="navigation" aria-label="Navigazione principale">
+      <a class="logo" href="/it/index.html">🌍 Air Vez</a>
+
+      <input id="nav-check" type="checkbox" class="nav-check" />
+      <label for="nav-check" class="nav-burger" aria-label="Apri menù" aria-controls="mainnav" aria-expanded="false">≡</label>
+
+      <ul id="mainnav" class="nav-links">
+        <li><a href="/it/index.html">Home</a></li>
+        <li><a href="/it/chi-siamo.html">Chi Siamo</a></li>
+        <li><a href="/it/airvez-travel.html">Air Vez Travel</a></li>
+        <li><a href="/it/airvez-academia.html">Air Vez Academia</a></li>
+        <li><a href="/it/prenota.html">Prenota</a></li>
+        <li><a href="/it/contatti.html">Contatti</a></li>
+        <li class="lang-switch">
+          <a href="/it/index.html" data-lang="it" aria-label="Italiano">🇮🇹</a>
+          <a href="/en/index.html" data-lang="en" aria-label="English">🇬🇧</a>
+          <a href="/es/index.html" data-lang="es" aria-label="Español">🇪🇸</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="page">
+    <section class="oops">
+      <div class="ghost" aria-hidden="true">👻</div>
+      <h1 id="t-404">Ops, pagina fantasma!</h1>
+      <p class="lead" id="d-404">
+        Il link che hai aperto non esiste (o si è perso in viaggio).
+      </p>
+
+      <div class="btns">
+        <a id="btn-it" class="btn" href="/it/index.html">Torna alla Home (IT)</a>
+        <a id="btn-en" class="btn" href="/en/index.html">Back to Home (EN)</a>
+        <a id="btn-es" class="btn" href="/es/index.html">Volver al Inicio (ES)</a>
+      </div>
+
+      <div class="lang-switch-404" aria-label="Cambia lingua">
+        <a href="/it/index.html" data-lang="it">🇮🇹</a>
+        <a href="/en/index.html" data-lang="en">🇬🇧</a>
+        <a href="/es/index.html" data-lang="es">🇪🇸</a>
+      </div>
+
+      <p class="timer" id="timer">Ti riportiamo alla Home tra <strong>6</strong> secondi…</p>
+      <p class="small" id="hint">
+        Se pensi che questo sia un errore, scrivici da <a href="/it/contatti.html">Contatti</a>.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Air Vez — Tutti i diritti riservati</p>
+  </footer>
+
+  <script>
+    // Evidenzia lingua attiva in base al path
+    (function(){
+      const seg = (location.pathname.split('/')[1] || '').toLowerCase();
+      document.querySelectorAll('.lang-switch-404 a, .lang-switch a').forEach(a=>{
+        if(a.dataset.lang === seg || (!seg && a.dataset.lang === 'it')){
+          a.classList.add('is-active');
+          a.setAttribute('aria-current','true');
+        }
+      });
+    })();
+
+    // Copie multilingua base (IT default)
+    (function(){
+      const seg = (location.pathname.split('/')[1] || 'it').toLowerCase();
+      const t = document.getElementById('t-404');
+      const d = document.getElementById('d-404');
+      const h = document.getElementById('hint');
+      const copy = {
+        it: {
+          title: 'Ops, pagina fantasma!',
+          desc:  'Il link che hai aperto non esiste (o si è perso in viaggio).',
+          hint:  'Se pensi che questo sia un errore, scrivici da <a href="/it/contatti.html">Contatti</a>.',
+          home:  '/it/index.html'
+        },
+        en: {
+          title: 'Oops, ghost page!',
+          desc:  'The link you opened does not exist (or got lost en route).',
+          hint:  'If you think this is a mistake, message us via <a href="/en/contatti.html">Contacts</a>.',
+          home:  '/en/index.html'
+        },
+        es: {
+          title: '¡Ups, página fantasma!',
+          desc:  'El enlace que abriste no existe (o se perdió en el camino).',
+          hint:  'Si crees que es un error, escríbenos desde <a href="/es/contatti.html">Contactos</a>.',
+          home:  '/es/index.html'
+        }
+      };
+      const c = copy[seg] || copy.it;
+      t.textContent = c.title;
+      d.textContent = c.desc;
+      h.innerHTML   = c.hint;
+
+      // Countdown + redirect soft alla home della lingua
+      const btns = { it: '#btn-it', en: '#btn-en', es: '#btn-es' };
+      const targetBtn = document.querySelector(btns[seg] || '#btn-it');
+      let s = 6;
+      const el = document.getElementById('timer').querySelector('strong');
+      const timer = setInterval(()=>{
+        s--; el.textContent = s;
+        if(s<=0){
+          clearInterval(timer);
+          location.href = c.home;
+        }
+      },1000);
+    })();
+
+    // Chiusura menu su click link (coerente col resto del sito)
+    (function(){
+      const cb = document.getElementById('nav-check');
+      const nav = document.getElementById('mainnav');
+      const burger = document.querySelector('.nav-burger');
+      if(!cb || !nav || !burger) return;
+      const sync = ()=> burger.setAttribute('aria-expanded', cb.checked ? 'true':'false');
+      cb.addEventListener('change', sync); sync();
+      nav.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=>{ cb.checked=false; sync(); }));
+      document.addEventListener('click', (e)=>{
+        if(!cb.checked) return;
+        const inside = nav.contains(e.target) || burger.contains(e.target) || e.target===cb;
+        if(!inside){ cb.checked=false; sync(); }
+      }, {passive:true});
+      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ cb.checked=false; sync(); }});
+    })();
+  </script>
+</body>
+</html>
