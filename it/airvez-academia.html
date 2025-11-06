@@ -5,34 +5,72 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Air Vez Academia – Italiano, Spagnolo & STEM</title>
 
-  <!-- ✅ usa lo style.css globale (puoi lasciare il ?v se vuoi forzare la cache) -->
+  <!-- stile globale del sito -->
   <link rel="stylesheet" href="../style.css?v=6">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
-  <!-- Stile locale per le tabelle prezzi: leggero e indipendente dal tuo style.css -->
+  <!-- ====================== STILE LOCALE TABELLE (NO SCROLL) ====================== -->
   <style>
-    .pricing { width: 100%; border-collapse: collapse; }
-    .pricing th, .pricing td { padding: 10px 12px; text-align: left; }
-    .pricing thead th { background: #f5faf9; color: var(--text); border-bottom: 1px solid #e6efed; }
-    .pricing tbody td { border-bottom: 1px solid #eef5f3; color: var(--muted); }
-    .price-badge { font-weight:700; color: var(--text); }
-    .pill { display:inline-block; padding:4px 10px; border-radius:999px; background:#e7faf5; color:var(--accent-2); font-size:12px; }
-    .list { margin: 10px 0 0; padding-left: 18px; }
-    .list li { margin: 6px 0; color: var(--muted); }
-    .cta-inline { margin-top:14px; display:inline-block; }
+    /* ✅ Le tabelle si adattano al contenitore, senza overflow orizzontale */
+    .pricing{
+      width:100%;
+      border-collapse:collapse;
+      table-layout:auto;          /* lascia adattare le colonne al contenuto */
+      word-break:break-word;
+    }
+    .pricing th, .pricing td{
+      padding:10px 12px;
+      text-align:left;
+      vertical-align:top;
+    }
+    .pricing thead th{
+      background:#f5faf9;
+      color:var(--text);
+      border-bottom:1px solid #e6efed;
+      font-weight:600;
+    }
+    .pricing tbody td{
+      border-bottom:1px solid #eef5f3;
+      color:var(--muted);
+    }
+    .price-badge{ font-weight:700; color:var(--text); white-space:nowrap; }
+    .pill{ display:inline-block; padding:4px 10px; border-radius:999px; background:#e7faf5; color:var(--accent-2); font-size:12px; white-space:nowrap; }
+    .list{ margin:10px 0 0; padding-left:18px; }
+    .list li{ margin:6px 0; color:var(--muted); }
+    .cta-inline{ margin-top:14px; display:inline-block; }
 
-    /* ✅ wrapper per tabelle lunghe su mobile: abilita lo scroll orizzontale senza rompere il layout */
-    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    .table-wrap table { min-width: 520px; } /* assicura spazio per 3 colonne comode */
+    /* ✅ Mobile: l'intestazione sparisce e ogni cella mostra la propria etichetta (nessuna info tagliata) */
+    @media (max-width:600px){
+      .pricing thead{ display:none; }
+      .pricing tr{
+        display:block;
+        margin-bottom:16px;
+        border-bottom:2px solid #f0f6f4;
+        padding-bottom:8px;
+      }
+      .pricing td{
+        display:block;
+        text-align:left;
+        padding:6px 0;
+      }
+      .pricing td::before{
+        content: attr(data-label);
+        font-weight:600;
+        color:var(--text);
+        display:block;
+        margin-bottom:3px;
+      }
+    }
   </style>
+  <!-- ============================================================================ -->
 </head>
 <body>
-  <!-- ✅ HEADER UNIFORME (stesso di tutte le pagine IT) -->
+  <!-- HEADER UNIFORME -->
   <header>
     <nav class="nav" role="navigation" aria-label="Navigazione principale">
       <a class="logo" href="index.html">🌍 Air Vez</a>
 
-      <!-- ✅ burger + checkbox per toggle mobile -->
+      <!-- burger + checkbox per toggle mobile -->
       <input id="nav-check" type="checkbox" class="nav-check" />
       <label for="nav-check" class="nav-burger" aria-label="Apri menù" aria-controls="mainnav" aria-expanded="false">≡</label>
 
@@ -40,12 +78,9 @@
         <li><a href="/it/index.html">Home</a></li>
         <li><a href="/it/chi-siamo.html">Chi Siamo</a></li>
         <li><a href="/it/airvez-travel.html">Air Vez Travel</a></li>
-        <!-- ✅ pagina corrente evidenziata sia con class sia con aria-current -->
         <li><a class="active" href="/it/airvez-academia.html" aria-current="page">Air Vez Academia</a></li>
         <li><a href="/it/prenota.html">Prenota</a></li>
         <li><a href="/it/contatti.html">Contatti</a></li>
-
-        <!-- ✅ switch lingue: solo bandiere -->
         <li class="lang-switch">
           <a href="/it/index.html" data-lang="it" aria-label="Italiano">🇮🇹</a>
           <a href="/en/index.html" data-lang="en" aria-label="English">🇬🇧</a>
@@ -55,7 +90,6 @@
     </nav>
   </header>
 
-  <!-- 🔒 DA QUI IN GIÙ il tuo contenuto resta invariato -->
   <main class="page">
     <h1>Air Vez Academia</h1>
     <p class="lead">
@@ -99,73 +133,63 @@
     <div class="cards">
       <article class="card">
         <h3>Lingue (Italiano / Spagnolo)</h3>
-
-        <!-- ✅ wrapper per scroll orizzontale su mobile -->
-        <div class="table-wrap">
-          <table class="pricing">
-            <thead>
-              <tr>
-                <th scope="col">Opzione</th>
-                <th scope="col">Dettagli</th>
-                <th scope="col">Prezzo</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Lezione singola</td>
-                <td>60 minuti • 1-to-1 • materiale incluso</td>
-                <td><span class="price-badge">15 € / h</span></td>
-              </tr>
-              <tr>
-                <td>Pacchetto 10 ore</td>
-                <td>Orari flessibili • valido 3 mesi</td>
-                <td><span class="price-badge">135 €</span> <span class="pill">-10%</span></td>
-              </tr>
-              <tr>
-                <td>Pacchetto 20 ore</td>
-                <td>Orari flessibili • valido 6 mesi</td>
-                <td><span class="price-badge">255 €</span> <span class="pill">-15%</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
+        <table class="pricing">
+          <thead>
+            <tr>
+              <th scope="col">Opzione</th>
+              <th scope="col">Dettagli</th>
+              <th scope="col">Prezzo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Opzione">Lezione singola</td>
+              <td data-label="Dettagli">60 minuti • 1-to-1 • materiale incluso</td>
+              <td data-label="Prezzo"><span class="price-badge">15 € / h</span></td>
+            </tr>
+            <tr>
+              <td data-label="Opzione">Pacchetto 10 ore</td>
+              <td data-label="Dettagli">Orari flessibili • valido 3 mesi</td>
+              <td data-label="Prezzo"><span class="price-badge">135 €</span> <span class="pill">-10%</span></td>
+            </tr>
+            <tr>
+              <td data-label="Opzione">Pacchetto 20 ore</td>
+              <td data-label="Dettagli">Orari flessibili • valido 6 mesi</td>
+              <td data-label="Prezzo"><span class="price-badge">255 €</span> <span class="pill">-15%</span></td>
+            </tr>
+          </tbody>
+        </table>
         <a class="cta-button cta-inline" href="contatti.html">Inizia con le lingue</a>
       </article>
 
       <article class="card">
         <h3>STEM (Matematica / Fisica / Chimica)</h3>
-
-        <!-- ✅ wrapper per scroll orizzontale su mobile -->
-        <div class="table-wrap">
-          <table class="pricing">
-            <thead>
-              <tr>
-                <th scope="col">Opzione</th>
-                <th scope="col">Dettagli</th>
-                <th scope="col">Prezzo</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Lezione singola</td>
-                <td>60 minuti • 1-to-1 • esercizi e correzioni</td>
-                <td><span class="price-badge">15 € / h</span></td>
-              </tr>
-              <tr>
-                <td>Pacchetto 10 ore</td>
-                <td>Programma personalizzato • valido 3 mesi</td>
-                <td><span class="price-badge">135 €</span> <span class="pill">-10%</span></td>
-              </tr>
-              <tr>
-                <td>Pacchetto 20 ore</td>
-                <td>Preparazione prove/esami • valido 6 mesi</td>
-                <td><span class="price-badge">255 €</span> <span class="pill">-15%</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
+        <table class="pricing">
+          <thead>
+            <tr>
+              <th scope="col">Opzione</th>
+              <th scope="col">Dettagli</th>
+              <th scope="col">Prezzo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Opzione">Lezione singola</td>
+              <td data-label="Dettagli">60 minuti • 1-to-1 • esercizi e correzioni</td>
+              <td data-label="Prezzo"><span class="price-badge">15 € / h</span></td>
+            </tr>
+            <tr>
+              <td data-label="Opzione">Pacchetto 10 ore</td>
+              <td data-label="Dettagli">Programma personalizzato • valido 3 mesi</td>
+              <td data-label="Prezzo"><span class="price-badge">135 €</span> <span class="pill">-10%</span></td>
+            </tr>
+            <tr>
+              <td data-label="Opzione">Pacchetto 20 ore</td>
+              <td data-label="Dettagli">Preparazione prove/esami • valido 6 mesi</td>
+              <td data-label="Prezzo"><span class="price-badge">255 €</span> <span class="pill">-15%</span></td>
+            </tr>
+          </tbody>
+        </table>
         <a class="cta-button cta-inline" href="contatti.html">Inizia con le STEM</a>
       </article>
     </div>
@@ -180,8 +204,7 @@
     <p>© 2025 Air Vez — Tutti i diritti riservati</p>
   </footer>
 
-  <!-- ✅ script globale: chiusura menu, gestione logo, evidenza lingua -->
+  <!-- script globale -->
   <script src="../script.js"></script>
 </body>
 </html>
-
