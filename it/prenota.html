@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prenota – Air Vez</title>
+  <link rel="stylesheet" href="style.css?v=7" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    .embed-wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.06);
+      overflow: hidden;
+    }
+    .embed-note {
+      max-width: 960px;
+      margin: 16px auto 0;
+      color: var(--muted);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="nav">
+      <a class="logo" href="index.html">🌍 Air Vez</a>
+
+      <input id="nav-check" type="checkbox" class="nav-check" />
+      <label for="nav-check" class="nav-burger" aria-label="Apri menù" aria-controls="mainnav">☰</label>
+
+      <ul id="mainnav" class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="chi-siamo.html">Chi Siamo</a></li>
+        <li><a href="airvez-travel.html">Air Vez Travel</a></li>
+        <li><a href="airvez-academia.html">Air Vez Academia</a></li>
+        <li><a class="active" href="prenota.html">Prenota</a></li>
+        <li><a href="contatti.html">Contatti</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="page">
+    <h1>Facciamo due chiacchiere</h1>
+    <p class="lead">
+      Scegli il giorno e l’orario nel tuo fuso.  
+      Riceverai subito la conferma e il link per la videochiamata.
+    </p>
+
+    <div class="embed-wrap">
+      <!-- 👇 Inserisci QUI il tuo link Calendly -->
+      <div class="calendly-inline-widget"
+           data-url="https://calendly.com/gustavoemanuel-pascuali94/15min"
+           style="min-width:320px;height:800px;"></div>
+    </div>
+
+    <p class="embed-note">
+      Il calendario mostra solo gli orari realmente disponibili.  
+      Se non trovi uno slot libero, scrivici via email o Instagram per fissare un appuntamento personalizzato.
+    </p>
+  </main>
+
+  <footer>
+    <p>© 2025 Air Vez — Tutti i diritti riservati</p>
+  </footer>
+
+  <!-- Libreria Calendly -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+</body>
+</html>
