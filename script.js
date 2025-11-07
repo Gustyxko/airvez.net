@@ -34,7 +34,6 @@
   const burger = document.querySelector('.nav-burger');  // label
   if(!cb || !nav || !burger) return;
 
-  // sincronizza stato sul body (stili) + aria-expanded
   const syncBodyClass = () => {
     document.body.classList.toggle('is-nav-open', cb.checked);
     burger.setAttribute('aria-expanded', cb.checked ? 'true' : 'false');
@@ -42,48 +41,44 @@
   cb.addEventListener('change', syncBodyClass);
   syncBodyClass();
 
-  // chiudi quando clicchi un link del menu
   nav.querySelectorAll('a').forEach(a=>{
     a.addEventListener('click', ()=>{ cb.checked = false; syncBodyClass(); }, {passive:true});
   });
 
-  // chiudi cliccando fuori
   document.addEventListener('click',(e)=>{
     if(!cb.checked) return;
     const inside = nav.contains(e.target) || burger.contains(e.target) || e.target === cb;
     if(!inside){ cb.checked = false; syncBodyClass(); }
   }, {passive:true});
 
-  // chiudi con ESC (desktop)
   document.addEventListener('keydown',(e)=>{
     if(e.key === 'Escape'){ cb.checked = false; syncBodyClass(); }
   });
 })();
 
 /* =================== COOKIE BAR + GA4 (persistente, GDPR) =================== */
-document.addEventListener('DOMContentLoaded', function(){
-  const GA_ID = 'G-YM7R3Q6F85';              // 👈 il tuo ID GA4
+(function(){
+  const GA_ID = 'G-YM7R3Q6F85';              // 👈 tu ID GA4
   const bar   = document.getElementById('cookie-bar');
   if(!bar) return;
 
+  // lee elección previa
   const consent = localStorage.getItem('avz-consent');
 
-  // Mostra solo se l'utente non ha ancora scelto
+  // muestra sólo si no hay elección previa
   if(!consent){
     bar.hidden = false;
   }
 
   function injectGA(){
-    if(window.__gaInjected) return;           // evita doppia iniezione
+    if(window.__gaInjected) return;           // evita doble inyección
     window.__gaInjected = true;
 
-    // script gtag.js
     const s1 = document.createElement('script');
     s1.async = true;
     s1.src   = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
     document.head.appendChild(s1);
 
-    // init GA
     const s2 = document.createElement('script');
     s2.text = `
       window.dataLayer = window.dataLayer || [];
@@ -94,38 +89,41 @@ document.addEventListener('DOMContentLoaded', function(){
     document.head.appendChild(s2);
   }
 
-  // Se in passato ha accettato, inietta GA subito
+  // si ya aceptó anteriormente, inyecta GA de inmediato
   if(consent === 'granted'){ injectGA(); }
 
-  // Click handlers (capture: true per battere eventuali overlay)
-  const acceptBtn = document.getElementById('cookie-accept');
-  const declineBtn = document.getElementById('cookie-decline');
+  // 🔒 Delegación de eventos (click/pointer/touch) sobre la barra
+  function handleChoice(action){
+    if(action === 'accept'){
+      localStorage.setItem('avz-consent','granted');
+      injectGA();
+    }else{
+      localStorage.setItem('avz-consent','denied');
+    }
+    bar.remove(); // cierra siempre
+  }
 
-  acceptBtn && acceptBtn.addEventListener('click', function(ev){
+  const delegated = (ev) => {
+    const t = ev.target.closest('[data-consent]');
+    if(!t) return;
+    ev.preventDefault();
     ev.stopPropagation();
-    localStorage.setItem('avz-consent','granted');
-    bar.remove();
-    injectGA();
-  }, true);
+    const action = t.getAttribute('data-consent'); // 'accept' | 'decline'
+    handleChoice(action);
+  };
 
-  declineBtn && declineBtn.addEventListener('click', function(ev){
-    ev.stopPropagation();
-    localStorage.setItem('avz-consent','denied');
-    bar.remove();
-  }, true);
+  // Soporte amplio para móviles (tap/click)
+  bar.addEventListener('pointerup', delegated, {passive:false, capture:true});
+  bar.addEventListener('click',     delegated, {passive:false, capture:true});
+  bar.addEventListener('touchend',  delegated, {passive:false, capture:true});
 
-  // Protezione extra: se qualcosa copre la barra, blocca la propagazione
-  bar.addEventListener('click', function(ev){
-    ev.stopPropagation();
-  }, true);
-});
+  // evita que clics en la barra se propaguen a overlays de fondo
+  bar.addEventListener('click', function(ev){ ev.stopPropagation(); }, true);
+})();
 
 /* =================== TRACCIAMENTO CLICK (CTA / link importanti) =================== */
 (function(){
-  // esegui solo se GA è presente
   function hasGA(){ return typeof gtag === 'function'; }
-
-  // Mappa rapida: selettore -> evento
   const map = [
     {sel: 'a[href*="calendly.com"]',          name: 'click_calendly'},
     {sel: 'a[href*="/it/prenota.html"]',      name: 'click_prenota'},
