@@ -84,7 +84,7 @@
   document.getElementById('cookie-accept')?.addEventListener('click', function(){
     localStorage.setItem('avz-consent','granted');
     bar.remove();
-    injectGA('G-XXXXXXXXXX'); // 👈 sostituisci
+    injectGA('G-YM7R3Q6F85'); // 👈 sostituisci
   });
 
   document.getElementById('cookie-decline')?.addEventListener('click', function(){
