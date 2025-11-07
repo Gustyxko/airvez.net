@@ -215,14 +215,14 @@ footer{ text-align:center; color: var(--muted); font-size: 14px; padding: 22px 1
   .exp-item::before{ left: -10px; top: 0.85rem; }
 }
 
-/* ========== Cookie/Consent bar (unica definizione) ========== */
+/* ========== Cookie/Consent bar (única definición) ========== */
 .cookie-bar{
   position: fixed; left: 12px; right:12px; bottom:12px;
-  z-index: 100000;                       /* sopra qualunque overlay */
+  z-index: 100000;                       /* por encima de todo */
   background:#fff; border:1px solid #e2efe9; border-radius:12px;
   box-shadow:0 10px 28px rgba(0,0,0,.14);
   padding:14px 16px; display:flex; gap:12px; align-items:center; flex-wrap:wrap;
-  pointer-events: auto;                  /* garantisce i click */
+  pointer-events: auto;                  /* asegura clics en la barra */
 }
 .cookie-bar *{ pointer-events: auto; }
 .cookie-bar p{ margin:0; color:var(--text); }
@@ -231,4 +231,3 @@ footer{ text-align:center; color: var(--muted); font-size: 14px; padding: 22px 1
 @media (max-width: 600px){
   .cookie-bar{ left:8px; right:8px; bottom:8px; }
 }
-
