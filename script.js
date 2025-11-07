@@ -59,3 +59,36 @@
     if(e.key === 'Escape'){ cb.checked = false; syncBodyClass(); }
   });
 })();
+/* === Banner cookie per GA4 === */
+(function(){
+  var bar = document.getElementById('cookie-bar');
+  if(!bar) return;
+
+  // Se l’utente non ha ancora scelto, mostra il banner
+  if(!localStorage.getItem('avz-consent')){
+    bar.hidden = false;
+  }
+
+  function injectGA(id){
+    // evita doppi insert
+    if (window.__gaInjected) return; window.__gaInjected = true;
+    var s1=document.createElement('script'); s1.async=true;
+    s1.src='https://www.googletagmanager.com/gtag/js?id='+id;
+    document.head.appendChild(s1);
+    var s2=document.createElement('script');
+    s2.innerHTML = "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}"+
+                   "gtag('js', new Date()); gtag('config', '"+id+"');";
+    document.head.appendChild(s2);
+  }
+
+  document.getElementById('cookie-accept')?.addEventListener('click', function(){
+    localStorage.setItem('avz-consent','granted');
+    bar.remove();
+    injectGA('G-XXXXXXXXXX'); // 👈 sostituisci
+  });
+
+  document.getElementById('cookie-decline')?.addEventListener('click', function(){
+    localStorage.setItem('avz-consent','denied');
+    bar.remove();
+  });
+})();
