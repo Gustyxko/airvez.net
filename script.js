@@ -1,6 +1,6 @@
 /* =================== UTILITÀ GLOBALI =================== */
 
-/* Evidenzia la lingua attiva in base al path (/it, /en, /es) */
+/* ✅ Evidenzia la lingua attiva in base al path (/it, /en, /es) */
 (function(){
   const current = (location.pathname.split('/')[1] || 'it').toLowerCase();
   document.querySelectorAll('.lang-switch a').forEach(a=>{
@@ -11,7 +11,7 @@
   });
 })();
 
-/* Effetto reveal (se in futuro userai class="reveal") */
+/* ✅ Effetto reveal (se in futuro userai class="reveal") */
 (function(){
   const els = document.querySelectorAll('.reveal');
   if(!els.length) return;
@@ -27,14 +27,14 @@
   els.forEach(el=>io.observe(el));
 })();
 
-/* =================== NAV MOBILE =================== */
+/* =================== NAV MOBILE (burger + chiudi automatico) =================== */
 (function(){
   const cb     = document.getElementById('nav-check');   // checkbox
   const nav    = document.getElementById('mainnav');     // ul
   const burger = document.querySelector('.nav-burger');  // label
   if(!cb || !nav || !burger) return;
 
-  // ✅ sincronizza stato sul body (solo per eventuali stili) + aria-expanded
+  // sincronizza stato sul body (stili) + aria-expanded
   const syncBodyClass = () => {
     document.body.classList.toggle('is-nav-open', cb.checked);
     burger.setAttribute('aria-expanded', cb.checked ? 'true' : 'false');
@@ -42,27 +42,27 @@
   cb.addEventListener('change', syncBodyClass);
   syncBodyClass();
 
-  // ✅ chiudi quando clicchi un link del menu
+  // chiudi quando clicchi un link del menu
   nav.querySelectorAll('a').forEach(a=>{
     a.addEventListener('click', ()=>{ cb.checked = false; syncBodyClass(); }, {passive:true});
   });
 
-  // ✅ chiudi cliccando fuori
+  // chiudi cliccando fuori
   document.addEventListener('click',(e)=>{
     if(!cb.checked) return;
     const inside = nav.contains(e.target) || burger.contains(e.target) || e.target === cb;
     if(!inside){ cb.checked = false; syncBodyClass(); }
   }, {passive:true});
 
-  // ✅ chiudi con ESC
+  // chiudi con ESC (desktop)
   document.addEventListener('keydown',(e)=>{
     if(e.key === 'Escape'){ cb.checked = false; syncBodyClass(); }
   });
 })();
 
-/* === Banner cookie per GA4 (persistente, fix desktop/mobile) === */
+/* =================== COOKIE BAR + GA4 (persistente, GDPR) =================== */
 document.addEventListener('DOMContentLoaded', function(){
-  const GA_ID = 'G-YM7R3Q6F85';              // 👈 il tuo ID
+  const GA_ID = 'G-YM7R3Q6F85';              // 👈 il tuo ID GA4
   const bar   = document.getElementById('cookie-bar');
   if(!bar) return;
 
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function(){
   // Se in passato ha accettato, inietta GA subito
   if(consent === 'granted'){ injectGA(); }
 
-  // Click handlers (usiamo capture per battere eventuali overlay)
+  // Click handlers (capture: true per battere eventuali overlay)
   const acceptBtn = document.getElementById('cookie-accept');
   const declineBtn = document.getElementById('cookie-decline');
 
@@ -114,20 +114,19 @@ document.addEventListener('DOMContentLoaded', function(){
     bar.remove();
   }, true);
 
-  // Protezione extra: se QUALCOSA copre la barra, forziamo i click a non propagare
+  // Protezione extra: se qualcosa copre la barra, blocca la propagazione
   bar.addEventListener('click', function(ev){
     ev.stopPropagation();
   }, true);
 });
 
-
-/* === Tracciamento click CTA / link importanti === */
+/* =================== TRACCIAMENTO CLICK (CTA / link importanti) =================== */
 (function(){
   // esegui solo se GA è presente
   function hasGA(){ return typeof gtag === 'function'; }
 
   // Mappa rapida: selettore -> evento
-  var map = [
+  const map = [
     {sel: 'a[href*="calendly.com"]',          name: 'click_calendly'},
     {sel: 'a[href*="/it/prenota.html"]',      name: 'click_prenota'},
     {sel: 'a[href*="/it/contatti.html"]',     name: 'click_contatti'},
@@ -146,7 +145,8 @@ document.addEventListener('DOMContentLoaded', function(){
           event_category: 'engagement',
           event_label: a.href
         });
-      }, {passive:true});
+      }, {passive:true, capture:true});
     });
   });
 })();
+
