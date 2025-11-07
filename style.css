@@ -157,4 +157,61 @@ footer{ text-align:center; color: var(--muted); font-size: 14px; padding: 22px 1
   header{ padding-top: env(safe-area-inset-top); }
 }
 
+/* === About layout, avatar, chips === */
+.about{ display:grid; grid-template-columns: 360px 1fr; gap: 28px; align-items:start; }
+.about-aside{ position: sticky; top: 92px; }
+.avatar{
+  width:100%; height:auto; display:block;
+  border-radius: 20px;
+  border: 3px solid #fff;
+  box-shadow: 0 18px 40px rgba(0,0,0,.14);
+  object-fit: cover;
+}
+.chips{ display:flex; gap:10px; margin-top:14px; flex-wrap:wrap; }
+.chip{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:8px 12px; border-radius:999px;
+  background:#e7faf5; color:#0d8c74; text-decoration:none; font-weight:600;
+  box-shadow: 0 4px 12px rgba(13,140,116,.12);
+}
+.chip .li{ margin-right:2px; }
+.chip:hover{ background:#dff6ef; }
+
+/* CV snapshot + valori */
+.cv-card{ background:#fff; border-radius:16px; padding:16px; box-shadow:0 12px 28px rgba(0,0,0,.08); margin:16px 0 10px; }
+.values-grid{ margin:22px 0; display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); }
+.values-grid .card{ background:var(--card); padding:16px; border-radius:var(--radius); box-shadow:var(--shadow); }
+.values-grid .bullets{ margin:10px 0 0; padding-left:18px; }
+.values-grid .bullets li{ margin:6px 0; color:var(--muted); }
+.about-body .tick{ margin:10px 0 0; padding-left:18px; }
+.about-body .tick li{ margin:6px 0; }
+
+/* === Timeline elegante === */
+.timeline-block{ margin-top:24px; }
+.timeline{
+  list-style:none; margin:18px 0 0; padding:0 0 0 22px; position:relative;
+}
+.timeline::before{
+  content:""; position:absolute; left:8px; top:6px; bottom:6px;
+  width:2px; background:linear-gradient(#cdeee6,#9ad9cc);
+}
+.timeline > li{ position:relative; margin:0 0 18px 0; }
+.timeline > li::before{
+  content:""; position:absolute; left:-2px; top:4px; width:12px; height:12px;
+  border-radius:50%; background:#0fa58a; box-shadow:0 0 0 3px rgba(15,165,138,.18);
+}
+.t-badge{
+  display:inline-block; font-size:.85rem; color:#0d8c74; background:#e7faf5;
+  padding:4px 8px; border-radius:999px; margin-bottom:6px; font-weight:600;
+}
+.t-meta{ color:var(--muted); margin:.25rem 0 .35rem; }
+.t-body{ margin:0; color:var(--muted); }
+.org{ color:var(--text); font-weight:600; }
+
+/* — Mobile: niente sticky per la foto, layout in colonna — */
+@media (max-width: 900px){
+  .about{ grid-template-columns: 1fr; }
+  .about-aside{ position: static; }       /* ✅ evita che la foto blocchi lo scroll */
+  .avatar{ max-height: 60vh; }
+}
 
