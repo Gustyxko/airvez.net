@@ -4,93 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Chi Siamo – Air Vez</title>
-
-  <!-- stile globale -->
-  <link rel="stylesheet" href="../style.css?v=6">
+  <link rel="stylesheet" href="../style.css?v=8" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-
-  <!-- Stili locali: solo per questa pagina -->
-  <style>
-    .about {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 34px 22px 70px;
-    }
-    .about-grid {
-      display: grid;
-      gap: 22px;
-      align-items: start;
-    }
-    @media (min-width: 880px){
-      .about-grid{
-        grid-template-columns: 320px 1fr; /* foto + contenuti */
-        gap: 28px;
-      }
-    }
-
-    /* Foto profilo */
-    .avatar-wrap{
-      position: sticky;
-      top: 12px;              /* resta visibile scorrendo su desktop */
-    }
-    .avatar{
-      width: 100%;
-      max-width: 320px;
-      display: block;
-      border-radius: 18px;     /* angoli morbidi */
-      border: 3px solid rgba(15,165,138,.18);  /* cornice in tinta */
-      box-shadow: 0 18px 40px rgba(0,0,0,.12); /* ombra soft */
-      object-fit: cover;
-      aspect-ratio: 4/5;      /* mantiene proporzioni eleganti */
-    }
-    .badge-row{
-      display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;
-    }
-    .badge{
-      background: #e7faf5;
-      color: var(--accent-2);
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    /* Social */
-    .socials{
-      display:flex; gap:12px; margin-top:14px;
-    }
-    .socials a{
-      display:inline-flex; align-items:center; justify-content:center;
-      width:40px; height:40px; border-radius:10px;
-      background:#ffffff; border:1px solid #e8efed;
-      box-shadow: var(--shadow);
-      transition: transform .15s ease, box-shadow .15s ease;
-    }
-    .socials a:hover{ transform: translateY(-2px); box-shadow: 0 10px 22px rgba(0,0,0,.10); }
-
-    /* Testi */
-    .about h1{ margin: 6px 0 10px; font-size: clamp(26px, 4.6vw, 38px); }
-    .about .lead{ color: var(--muted); }
-    .cv-card{
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 18px 18px 16px;
-      margin-top: 18px;
-    }
-    .cv-card h3{ margin: 0 0 8px; }
-    .cv-grid{
-      display:grid; gap:16px;
-    }
-    @media (min-width: 720px){
-      .cv-grid{ grid-template-columns: 1fr 1fr; }
-    }
-    .cv-list{ margin: 0; padding-left: 18px; }
-    .cv-list li{ margin: 6px 0; color: var(--muted); }
-
-    /* CTA */
-    .cta-inline{ margin-top:14px; display:inline-block; }
-  </style>
 </head>
 <body>
   <header>
@@ -108,7 +23,7 @@
         <li><a href="/it/prenota.html">Prenota</a></li>
         <li><a href="/it/contatti.html">Contatti</a></li>
         <li class="lang-switch">
-          <a href="/it/chi-siamo.html" data-lang="it" aria-label="Italiano">🇮🇹</a>
+          <a href="/it/index.html" data-lang="it" aria-label="Italiano">🇮🇹</a>
           <a href="/en/index.html" data-lang="en" aria-label="English">🇬🇧</a>
           <a href="/es/index.html" data-lang="es" aria-label="Español">🇪🇸</a>
         </li>
@@ -116,90 +31,129 @@
     </nav>
   </header>
 
-  <main class="about">
-    <h1>Gustavo – Fondatore di Air Vez</h1>
-    <p class="lead">Viaggi autentici, persone vere, soluzione pratica ai problemi di viaggio e studio. Air Vez nasce per connettere culture e rendere le esperienze semplici, sicure e memorabili.</p>
+  <main class="page">
+    <section class="about">
+      <aside class="about-aside">
+        <!-- Sostituisci il filename se diverso -->
+        <img class="avatar" src="/assets/gustavo-vietnam.jpeg" alt="Gustavo Emanuel Pascuali" width="560" height="700" loading="lazy">
 
-    <section class="about-grid">
-      <!-- Colonna 1: Foto + contatti -->
-      <aside class="avatar-wrap">
-        <!-- 🔁 Sostituisci il filename se usi un’altra immagine -->
-        <img class="avatar" src="/assets/gustavo.vietnam.jpeg" alt="Gustavo – fondatore di Air Vez" loading="lazy">
-
-        <div class="badge-row">
-          <!-- Modifica o aggiungi badge liberi -->
-          <span class="badge">Travel Designer</span>
-          <span class="badge">Project-minded</span>
-          <span class="badge">Multilingue</span>
-        </div>
-
-        <div class="socials" aria-label="Social e contatti">
-          <!-- 🔁 Inserisci il tuo URL LinkedIn -->
-          <a href="https://www.linkedin.com/in/gustavo-emanuel-pascuali/" target="_blank" rel="noopener" aria-label="LinkedIn">
-            <!-- icona SVG LinkedIn -->
-            <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path fill="#0A66C2" d="M20.45 20.45h-3.56v-5.6c0-1.34-.02-3.06-1.86-3.06-1.86 0-2.14 1.45-2.14 2.96v5.7H9.33V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22 0H2A2 2 0 0 0 0 2v20a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
-            </svg>
-          </a>
-          <!-- esempio: mailto diretto (opzionale) -->
-          <a href="mailto:gepascuali@airvez.net" aria-label="Email">
-            <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path fill="#0fa58a" d="M12 13 2 6h20l-10 7Zm0 2 10-7v10H2V8l10 7Z"/>
-            </svg>
+        <div class="chips">
+          <a class="chip" href="mailto:hello@airvez.net" aria-label="Invia email">✉️ Email</a>
+          <a class="chip" href="https://www.linkedin.com/in/gustavo-emanuel-pascuali/" target="_blank" rel="noopener" aria-label="LinkedIn di Gustavo">
+            <svg class="li" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0zM8 8h4.8v2.2h.1C13.7 8.9 15.6 8 17.8 8 22.3 8 24 10.7 24 15.1V24h-5v-7.9c0-1.9 0-4.3-2.6-4.3-2.6 0-3 2-3 4.1V24H8z"/></svg>
+            LinkedIn
           </a>
         </div>
       </aside>
 
-      <!-- Colonna 2: Bio + mini-CV -->
-      <section>
-        <h2>Perché Air Vez</h2>
-        <p>
-          Volevo unire la cura per l’organizzazione con l’amore per l’avventura.
-          Air Vez è il risultato: itinerari chiari, supporto reale e un approccio
-          umano che valorizza l’incontro con le persone.
+      <div class="about-body">
+        <h1>Ciao, sono Gustavo 👋</h1>
+        <p class="lead">
+          Ingegnere aerospaziale e <strong>Support Engineer</strong> in Iberia. Con Air Vez voglio unire
+          <strong>viaggi autentici</strong>, <strong>connessioni umane</strong> e condivisione di valore pratico.
         </p>
 
+        <!-- Snapshot CV -->
         <div class="cv-card">
-          <h3>Mini-CV</h3>
-          <div class="cv-grid">
-            <div>
-              <h4>Competenze chiave</h4>
-              <ul class="cv-list">
-                <!-- ✏️ Modifica con le tue skill reali -->
-                <li>Pianificazione viaggi &amp; logistica a budget</li>
-                <li>Project &amp; process management</li>
-                <li>Comunicazione multilingue (IT/ES/EN)</li>
-                <li>Formazione personalizzata (lingue &amp; STEM)</li>
-              </ul>
-            </div>
-            <div>
-              <h4>Esperienza sintetica</h4>
-              <ul class="cv-list">
-                <!-- ✏️ Scrivi 3-4 righe ad alto impatto -->
-                <li>Coordinamento e supporto tecnico in contesti strutturati</li>
-                <li>Consulenza e accompagnamento per viaggi su misura</li>
-                <li>Docenza 1-to-1 (Italiano/Spagnolo e materie scientifiche)</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- CTA opzionali -->
-          <!-- Se in futuro carichi un PDF in /assets/CV-Gustavo.pdf, sblocca il link qui sotto -->
-          <!-- <a class="cta-button cta-inline" href="/assets/CV-Gustavo.pdf" target="_blank" rel="noopener">Scarica CV</a> -->
-          <a class="cta-button cta-inline" href="/it/prenota.html">Parliamone</a>
+          <h2>Chi sono in breve</h2>
+          <ul class="tick">
+            <li>Support Engineer – Iberia: qualità, safety, affidabilità e documentazione tecnica.</li>
+            <li>Esperienza in maintenance control, istruzione Part-147 e traffic management.</li>
+            <li>Formazione: Ing. Aerospaziale (BSc) + Master F.A.T.S. @ Politecnico di Milano.</li>
+            <li>Lingue: IT 🇮🇹 • ES 🇪🇸 • EN 🇬🇧.</li>
+            <li>Air Vez Academia: lingue & STEM 1-to-1 con piani su misura.</li>
+            <li>Mission: ispirare viaggi lenti, consapevoli e connessi alle comunità locali.</li>
+          </ul>
         </div>
 
-        <div class="cv-card">
-          <h3>Valori</h3>
-          <p class="lead">Rispetto, curiosità, responsabilità. Viaggiare bene significa lasciare il mondo un po’ meglio di come lo si è trovato.</p>
+        <!-- Timeline Esperienza -->
+        <section class="timeline-block">
+          <h2>Esperienza</h2>
+
+          <ol class="timeline">
+            <li>
+              <div class="t-badge">Nov 2023 → oggi</div>
+              <h3>Line Maintenance Support Engineer — <span class="org">Iberia</span></h3>
+              <p class="t-meta">Madrid (ES) • In presenza</p>
+              <p class="t-body">Supporto ingegneristico 24h per la flotta Iberia: affidabilità, safety, processi e risoluzione tecnica.</p>
+            </li>
+
+            <li>
+              <div class="t-badge">Ago 2022 → Nov 2023</div>
+              <h3>Maintenance Control Center Coordinator — <span class="org">Volotea</span></h3>
+              <p class="t-meta">Barcellona (ES)</p>
+              <p class="t-body">Coordinamento attività MCC per A320 family: troubleshooting, AOG, gestione disservizi e rettifiche secondo norme e manuali.</p>
+            </li>
+
+            <li>
+              <div class="t-badge">Nov 2020 → Ago 2022</div>
+              <h3>Aircraft Maintenance Instructor (EASA Part-147) — <span class="org">Avotec Swiss SA</span></h3>
+              <p class="t-meta">Mendrisio (CH) • Attività in CH, IT, TR, NP, ES</p>
+              <p class="t-body">Docenza B1/B2 (teoria): sistemi aeronautici, safety e normative EASA Part-66/147; sviluppo materiale e valutazioni.</p>
+            </li>
+
+            <li>
+              <div class="t-badge">Lug 2022 → Ago 2022</div>
+              <h3>Truck Maintenance Instructor — <span class="org">TPS Group</span></h3>
+              <p class="t-meta">Docenza su IVECO New Trakker Hi-Land Euro 3 (Bangladesh Army).</p>
+            </li>
+
+            <li>
+              <div class="t-badge">Nov 2019 → Feb 2020</div>
+              <h3>Airport Safety Officer (Tirocinio) — <span class="org">Aeroporto di Bologna</span></h3>
+              <p class="t-body">Esercitazione di emergenza (table-top) B777-300ER crash scenario; safety, coordinamento e procedure airside.</p>
+            </li>
+          </ol>
+        </section>
+
+        <!-- Formazione -->
+        <section class="timeline-block">
+          <h2>Formazione</h2>
+          <ol class="timeline">
+            <li>
+              <div class="t-badge">2019 → 2020</div>
+              <h3>Master — <span class="org">Fundamentals of the Air Transport System</span></h3>
+              <p class="t-meta">Politecnico di Milano • Valutazione: 105/110</p>
+              <p class="t-body">Cybersecurity, Quality Assurance, Compliance Monitoring, Safety Mgmt, Human Factors, Emergency Mgmt, Airport Capacity, Aircraft Management.</p>
+            </li>
+            <li>
+              <div class="t-badge">2015 → 2019</div>
+              <h3>Laurea triennale in Ingegneria Aerospaziale — <span class="org">Politecnico di Milano</span></h3>
+              <p class="t-body">Safety of Aviation Systems; Air Transport Logistics & Organization.</p>
+            </li>
+          </ol>
+        </section>
+
+        <!-- Valori -->
+        <div class="values-grid">
+          <article class="card">
+            <h3>Perché Air Vez</h3>
+            <p>Dimostrare che si può <strong>vivere viaggiando</strong> con rispetto e sostenibilità, costruendo competenze e comunità.</p>
+          </article>
+          <article class="card">
+            <h3>Missione</h3>
+            <p>Connettere persone, culture e opportunità: guide pratiche, mentorship e progetti che sbloccano <em>esperienze reali</em>.</p>
+          </article>
+          <article class="card">
+            <h3>Valori</h3>
+            <ul class="bullets">
+              <li>Avventura & curiosità</li>
+              <li>Rispetto & community</li>
+              <li>Qualità & sicurezza</li>
+              <li>Onestà & utilità</li>
+            </ul>
+          </article>
         </div>
-      </section>
+
+        <a class="cta-button" href="/it/prenota.html">Parliamone 15 minuti</a>
+      </div>
     </section>
   </main>
 
   <footer>
     <p>© 2025 Air Vez — Tutti i diritti riservati</p>
   </footer>
+
   <script src="../script.js"></script>
 </body>
 </html>
