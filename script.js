@@ -92,3 +92,32 @@
     bar.remove();
   });
 })();
+/* === Tracciamento click CTA / link importanti === */
+(function(){
+  // esegui solo se GA è presente
+  function hasGA(){ return typeof gtag === 'function'; }
+
+  // Mappa rapida: selettore -> evento
+  var map = [
+    {sel: 'a[href*="calendly.com"]',          name: 'click_calendly'},
+    {sel: 'a[href*="/it/prenota.html"]',      name: 'click_prenota'},
+    {sel: 'a[href*="/it/contatti.html"]',     name: 'click_contatti'},
+    {sel: 'a[href*="/it/supporta.html"]',     name: 'click_supporta'},
+    {sel: 'a[href^="mailto:"]',               name: 'click_email'},
+    {sel: 'a[href^="https://wa.me/"]',        name: 'click_whatsapp'},
+    {sel: 'a[href*="paypal.com"]',            name: 'click_paypal'},
+    {sel: 'a[href*="revolut.me"]',            name: 'click_revolut'}
+  ];
+
+  map.forEach(function(item){
+    document.querySelectorAll(item.sel).forEach(function(a){
+      a.addEventListener('click', function(){
+        if(!hasGA()) return;
+        gtag('event', item.name, {
+          event_category: 'engagement',
+          event_label: a.href
+        });
+      }, {passive:true});
+    });
+  });
+})();
