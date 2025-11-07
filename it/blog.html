@@ -3,6 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <!-- GA4 loader: inietta GA solo se l’utente ha dato il consenso -->
+<script>
+  (function(){
+    var id = 'G-YM7R3Q6F85';            // 👈 Sostituisci con il tuo Measurement ID
+    if (localStorage.getItem('avz-consent') === 'granted') {
+      // carica GA4
+      var s1 = document.createElement('script'); s1.async = true;
+      s1.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
+      document.head.appendChild(s1);
+      var s2 = document.createElement('script');
+      s2.innerHTML = `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', '${id}');
+      `;
+      document.head.appendChild(s2);
+    }
+  })();
+</script>
   <title>Diario & Guide | Air Vez</title>
   <meta name="description" content="Guide pratiche, diari di viaggio lenti e consigli su itinerari, attrezzatura essenziale e sicurezza.">
   <link rel="stylesheet" href="../style.css?v=6">
