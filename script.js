@@ -59,39 +59,52 @@
     if(e.key === 'Escape'){ cb.checked = false; syncBodyClass(); }
   });
 })();
-/* === Banner cookie per GA4 === */
+
+/* === Banner cookie per GA4 (versione persistente migliorata) === */
 (function(){
-  var bar = document.getElementById('cookie-bar');
+  const id = 'G-YM7R3Q6F85'; // ✅ tuo ID GA4
+  const bar = document.getElementById('cookie-bar');
   if(!bar) return;
 
-  // Se l’utente non ha ancora scelto, mostra il banner
-  if(!localStorage.getItem('avz-consent')){
+  // ✅ recupera consenso da localStorage, visibile in tutte le pagine
+  const consent = localStorage.getItem('avz-consent');
+
+  // mostra il banner solo se non c'è ancora stata una scelta
+  if(!consent){
     bar.hidden = false;
   }
 
-  function injectGA(id){
-    // evita doppi insert
-    if (window.__gaInjected) return; window.__gaInjected = true;
-    var s1=document.createElement('script'); s1.async=true;
+  function injectGA(){
+    if(window.__gaInjected) return;
+    window.__gaInjected = true;
+    const s1=document.createElement('script'); s1.async=true;
     s1.src='https://www.googletagmanager.com/gtag/js?id='+id;
     document.head.appendChild(s1);
-    var s2=document.createElement('script');
-    s2.innerHTML = "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}"+
-                   "gtag('js', new Date()); gtag('config', '"+id+"');";
+    const s2=document.createElement('script');
+    s2.innerHTML = `
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', '${id}');
+    `;
     document.head.appendChild(s2);
   }
 
-  document.getElementById('cookie-accept')?.addEventListener('click', function(){
+  // ✅ se in passato l’utente ha accettato, iniettiamo subito GA
+  if(consent === 'granted'){ injectGA(); }
+
+  document.getElementById('cookie-accept')?.addEventListener('click', () => {
     localStorage.setItem('avz-consent','granted');
     bar.remove();
-    injectGA('G-YM7R3Q6F85'); // 👈 sostituisci
+    injectGA();
   });
 
-  document.getElementById('cookie-decline')?.addEventListener('click', function(){
+  document.getElementById('cookie-decline')?.addEventListener('click', () => {
     localStorage.setItem('avz-consent','denied');
     bar.remove();
   });
 })();
+
 /* === Tracciamento click CTA / link importanti === */
 (function(){
   // esegui solo se GA è presente
