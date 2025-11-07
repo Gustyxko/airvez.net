@@ -60,50 +60,66 @@
   });
 })();
 
-/* === Banner cookie per GA4 (versione persistente migliorata) === */
-(function(){
-  const id = 'G-YM7R3Q6F85'; // ✅ tuo ID GA4
-  const bar = document.getElementById('cookie-bar');
+/* === Banner cookie per GA4 (persistente, fix desktop/mobile) === */
+document.addEventListener('DOMContentLoaded', function(){
+  const GA_ID = 'G-YM7R3Q6F85';              // 👈 il tuo ID
+  const bar   = document.getElementById('cookie-bar');
   if(!bar) return;
 
-  // ✅ recupera consenso da localStorage, visibile in tutte le pagine
   const consent = localStorage.getItem('avz-consent');
 
-  // mostra il banner solo se non c'è ancora stata una scelta
+  // Mostra solo se l'utente non ha ancora scelto
   if(!consent){
     bar.hidden = false;
   }
 
   function injectGA(){
-    if(window.__gaInjected) return;
+    if(window.__gaInjected) return;           // evita doppia iniezione
     window.__gaInjected = true;
-    const s1=document.createElement('script'); s1.async=true;
-    s1.src='https://www.googletagmanager.com/gtag/js?id='+id;
+
+    // script gtag.js
+    const s1 = document.createElement('script');
+    s1.async = true;
+    s1.src   = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
     document.head.appendChild(s1);
-    const s2=document.createElement('script');
-    s2.innerHTML = `
+
+    // init GA
+    const s2 = document.createElement('script');
+    s2.text = `
       window.dataLayer = window.dataLayer || [];
       function gtag(){ dataLayer.push(arguments); }
       gtag('js', new Date());
-      gtag('config', '${id}');
+      gtag('config', '${GA_ID}');
     `;
     document.head.appendChild(s2);
   }
 
-  // ✅ se in passato l’utente ha accettato, iniettiamo subito GA
+  // Se in passato ha accettato, inietta GA subito
   if(consent === 'granted'){ injectGA(); }
 
-  document.getElementById('cookie-accept')?.addEventListener('click', () => {
+  // Click handlers (usiamo capture per battere eventuali overlay)
+  const acceptBtn = document.getElementById('cookie-accept');
+  const declineBtn = document.getElementById('cookie-decline');
+
+  acceptBtn && acceptBtn.addEventListener('click', function(ev){
+    ev.stopPropagation();
     localStorage.setItem('avz-consent','granted');
     bar.remove();
     injectGA();
-  });
+  }, true);
 
-  document.getElementById('cookie-decline')?.addEventListener('click', () => {
+  declineBtn && declineBtn.addEventListener('click', function(ev){
+    ev.stopPropagation();
     localStorage.setItem('avz-consent','denied');
     bar.remove();
-  });
-})();
+  }, true);
+
+  // Protezione extra: se QUALCOSA copre la barra, forziamo i click a non propagare
+  bar.addEventListener('click', function(ev){
+    ev.stopPropagation();
+  }, true);
+});
+
 
 /* === Tracciamento click CTA / link importanti === */
 (function(){
