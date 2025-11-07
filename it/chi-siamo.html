@@ -5,43 +5,91 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Chi Siamo – Air Vez</title>
 
-  <!-- (opzionale, rapido) SEO base specifico della pagina -->
-  <meta name="description" content="Air Vez crea viaggi autentici e lezioni su misura. Team vicino, processi chiari e valori solidi: avventura, rispetto e connessione.">
-  <link rel="canonical" href="https://airvez.net/it/chi-siamo.html">
-
-  <link rel="alternate" href="https://airvez.net/it/chi-siamo.html" hreflang="it">
-  <link rel="alternate" href="https://airvez.net/en/about.html" hreflang="en">
-  <link rel="alternate" href="https://airvez.net/es/sobre-nosotros.html" hreflang="es">
-  <link rel="alternate" href="https://airvez.net/it/chi-siamo.html" hreflang="x-default">
-
   <!-- stile globale -->
-  <link rel="stylesheet" href="../style.css?v=7">
+  <link rel="stylesheet" href="../style.css?v=6">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
+  <!-- Stili locali: solo per questa pagina -->
   <style>
-    /* Micro-stili locali, coerenti con il tuo tema */
-    .kpi { display:grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin-top:16px; }
-    .kpi .card { text-align:center; padding:18px; }
-    .kpi .num { font-size: clamp(22px, 4.2vw, 34px); font-weight:700; color: var(--text); }
-    .kpi .lab { color: var(--muted); font-size: 14px; }
+    .about {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 34px 22px 70px;
+    }
+    .about-grid {
+      display: grid;
+      gap: 22px;
+      align-items: start;
+    }
+    @media (min-width: 880px){
+      .about-grid{
+        grid-template-columns: 320px 1fr; /* foto + contenuti */
+        gap: 28px;
+      }
+    }
 
-    .team { display:grid; gap:18px; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); }
-    .member { text-align:center; }
-    .member img { width:100%; height:220px; object-fit:cover; border-radius: var(--radius); box-shadow: var(--shadow); }
-    .member h3 { margin:10px 0 4px; }
-    .member p.role { margin:0; color: var(--muted); font-size:14px; }
-    .member p.bio { margin:8px 0 0; color: var(--muted); }
+    /* Foto profilo */
+    .avatar-wrap{
+      position: sticky;
+      top: 12px;              /* resta visibile scorrendo su desktop */
+    }
+    .avatar{
+      width: 100%;
+      max-width: 320px;
+      display: block;
+      border-radius: 18px;     /* angoli morbidi */
+      border: 3px solid rgba(15,165,138,.18);  /* cornice in tinta */
+      box-shadow: 0 18px 40px rgba(0,0,0,.12); /* ombra soft */
+      object-fit: cover;
+      aspect-ratio: 4/5;      /* mantiene proporzioni eleganti */
+    }
+    .badge-row{
+      display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;
+    }
+    .badge{
+      background: #e7faf5;
+      color: var(--accent-2);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+    }
 
-    .steps { counter-reset: s; }
-    .steps .card h3::before{ counter-increment:s; content: counter(s) ". "; color: var(--accent-2); }
+    /* Social */
+    .socials{
+      display:flex; gap:12px; margin-top:14px;
+    }
+    .socials a{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:40px; height:40px; border-radius:10px;
+      background:#ffffff; border:1px solid #e8efed;
+      box-shadow: var(--shadow);
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .socials a:hover{ transform: translateY(-2px); box-shadow: 0 10px 22px rgba(0,0,0,.10); }
 
-    .timeline { border-left: 3px solid rgba(15,165,138,.18); padding-left: 14px; margin-top: 8px; }
-    .timeline .t-item { margin: 10px 0; }
-    .timeline .t-item strong { color: var(--text); }
+    /* Testi */
+    .about h1{ margin: 6px 0 10px; font-size: clamp(26px, 4.6vw, 38px); }
+    .about .lead{ color: var(--muted); }
+    .cv-card{
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px 18px 16px;
+      margin-top: 18px;
+    }
+    .cv-card h3{ margin: 0 0 8px; }
+    .cv-grid{
+      display:grid; gap:16px;
+    }
+    @media (min-width: 720px){
+      .cv-grid{ grid-template-columns: 1fr 1fr; }
+    }
+    .cv-list{ margin: 0; padding-left: 18px; }
+    .cv-list li{ margin: 6px 0; color: var(--muted); }
 
-    .testi { display:grid; gap:18px; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); }
-    .quote { background: var(--card); padding:16px; border-radius: var(--radius); box-shadow: var(--shadow); font-style: italic; }
-    .quote .who { margin-top:8px; font-style: normal; color: var(--muted); font-size: 14px; }
+    /* CTA */
+    .cta-inline{ margin-top:14px; display:inline-block; }
   </style>
 </head>
 <body>
@@ -61,136 +109,97 @@
         <li><a href="/it/contatti.html">Contatti</a></li>
         <li class="lang-switch">
           <a href="/it/chi-siamo.html" data-lang="it" aria-label="Italiano">🇮🇹</a>
-          <a href="/en/about.html" data-lang="en" aria-label="English">🇬🇧</a>
-          <a href="/es/sobre-nosotros.html" data-lang="es" aria-label="Español">🇪🇸</a>
+          <a href="/en/index.html" data-lang="en" aria-label="English">🇬🇧</a>
+          <a href="/es/index.html" data-lang="es" aria-label="Español">🇪🇸</a>
         </li>
       </ul>
     </nav>
   </header>
 
-  <main class="page">
-    <!-- HERO -->
-    <section class="hero reveal">
-      <h1>Viaggi autentici, persone vere.</h1>
-      <p class="lead">Air Vez nasce dall’idea che le esperienze migliori sono quelle che connettono: luoghi, culture e persone. Con lo stesso spirito costruiamo lezioni su misura.</p>
-      <a href="/it/contatti.html" class="cta-button">Parliamone</a>
-    </section>
+  <main class="about">
+    <h1>Gustavo – Fondatore di Air Vez</h1>
+    <p class="lead">Viaggi autentici, persone vere, soluzione pratica ai problemi di viaggio e studio. Air Vez nasce per connettere culture e rendere le esperienze semplici, sicure e memorabili.</p>
 
-    <!-- KPI / PROVA SOCIALE -->
-    <section class="kpi reveal" aria-label="Risultati in breve">
-      <article class="card">
-        <div class="num">+120</div>
-        <div class="lab">viaggi organizzati / consulenze</div>
-      </article>
-      <article class="card">
-        <div class="num">+900</div>
-        <div class="lab">ore di lezione 1-to-1</div>
-      </article>
-      <article class="card">
-        <div class="num">4.9/5</div>
-        <div class="lab">soddisfazione media</div>
-      </article>
-    </section>
+    <section class="about-grid">
+      <!-- Colonna 1: Foto + contatti -->
+      <aside class="avatar-wrap">
+        <!-- 🔁 Sostituisci il filename se usi un’altra immagine -->
+        <img class="avatar" src="/assets/gustavo.vietnam.jpeg" alt="Gustavo – fondatore di Air Vez" loading="lazy">
 
-    <!-- VALORI -->
-    <section class="reveal" style="margin-top:18px">
-      <h2>I nostri valori</h2>
-      <div class="cards">
-        <article class="card">
-          <h3>Autenticità</h3>
-          <p>Esperienze reali, lontane dal turismo di massa, con incontri che lasciano il segno.</p>
-        </article>
-        <article class="card">
-          <h3>Rispetto</h3>
-          <p>Per culture, ambiente e persone. Viaggiare bene significa lasciare un impatto positivo.</p>
-        </article>
-        <article class="card">
-          <h3>Connessione</h3>
-          <p>Mettiamo le persone al centro: ascolto, fiducia, comunità.</p>
-        </article>
-        <article class="card">
-          <h3>Chiarezza</h3>
-          <p>Processi semplici, prezzi trasparenti, obiettivi condivisi.</p>
-        </article>
-      </div>
-    </section>
+        <div class="badge-row">
+          <!-- Modifica o aggiungi badge liberi -->
+          <span class="badge">Travel Designer</span>
+          <span class="badge">Project-minded</span>
+          <span class="badge">Multilingue</span>
+        </div>
 
-    <!-- MINI-TIMELINE -->
-    <section class="reveal" style="margin-top:22px">
-      <h2>La nostra storia in breve</h2>
-      <div class="timeline">
-        <div class="t-item"><strong>Le origini:</strong> tanti paesi visitati, l’idea di trasformare l’esperienza in un servizio utile.</div>
-        <div class="t-item"><strong>Air Vez Travel:</strong> primi itinerari su misura con attenzione a ritmo, budget e autenticità.</div>
-        <div class="t-item"><strong>Air Vez Academia:</strong> nasce la linea education: Italiano/Spagnolo e materie STEM 1-to-1.</div>
-        <div class="t-item"><strong>Oggi:</strong> community in crescita, progetti media e nuovi format di viaggio/learning.</div>
-      </div>
-    </section>
+        <div class="socials" aria-label="Social e contatti">
+          <!-- 🔁 Inserisci il tuo URL LinkedIn -->
+          <a href="https://www.linkedin.com/in/gustavo-emanuel-pascuali/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <!-- icona SVG LinkedIn -->
+            <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path fill="#0A66C2" d="M20.45 20.45h-3.56v-5.6c0-1.34-.02-3.06-1.86-3.06-1.86 0-2.14 1.45-2.14 2.96v5.7H9.33V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22 0H2A2 2 0 0 0 0 2v20a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+            </svg>
+          </a>
+          <!-- esempio: mailto diretto (opzionale) -->
+          <a href="mailto:info@airvez.net" aria-label="Email">
+            <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path fill="#0fa58a" d="M12 13 2 6h20l-10 7Zm0 2 10-7v10H2V8l10 7Z"/>
+            </svg>
+          </a>
+        </div>
+      </aside>
 
-    <!-- TEAM -->
-    <section class="reveal" style="margin-top:22px">
-      <h2>Chi c’è dietro Air Vez</h2>
-      <div class="team">
-        <article class="card member">
-          <img src="/assets/team-gus.jpg" alt="Ritratto team Air Vez" loading="lazy">
-          <h3>Gustavo</h3>
-          <p class="role">Travel designer &amp; Content</p>
-          <p class="bio">Amo costruire viaggi fluidi, con tempo per vivere i luoghi davvero.</p>
-        </article>
-        <article class="card member">
-          <img src="/assets/team-nat.jpg" alt="Ritratto team Air Vez" loading="lazy">
-          <h3>Nataly</h3>
-          <p class="role">Academia &amp; Community</p>
-          <p class="bio">Lingue e STEM su misura: metodo chiaro, obiettivi realistici, risultati.</p>
-        </article>
-        <!-- Aggiungi altri se servono -->
-      </div>
-    </section>
+      <!-- Colonna 2: Bio + mini-CV -->
+      <section>
+        <h2>Perché Air Vez</h2>
+        <p>
+          Volevo unire la cura per l’organizzazione con l’amore per l’avventura.
+          Air Vez è il risultato: itinerari chiari, supporto reale e un approccio
+          umano che valorizza l’incontro con le persone.
+        </p>
 
-    <!-- COME LAVORIAMO -->
-    <section class="reveal" style="margin-top:22px">
-      <h2>Come lavoriamo</h2>
-      <div class="cards steps">
-        <article class="card">
-          <h3>Ascolto &amp; obiettivi</h3>
-          <p>Breve call o messaggio per capire preferenze, tempi e budget.</p>
-        </article>
-        <article class="card">
-          <h3>Proposta su misura</h3>
-          <p>Itinerario/programma chiaro, opzioni e costi trasparenti.</p>
-        </article>
-        <article class="card">
-          <h3>Accompagnamento</h3>
-          <p>Supporto prima/durante: consigli pratici, adattamenti, materiale.</p>
-        </article>
-      </div>
-    </section>
+        <div class="cv-card">
+          <h3>Mini-CV</h3>
+          <div class="cv-grid">
+            <div>
+              <h4>Competenze chiave</h4>
+              <ul class="cv-list">
+                <!-- ✏️ Modifica con le tue skill reali -->
+                <li>Pianificazione viaggi &amp; logistica a budget</li>
+                <li>Project &amp; process management</li>
+                <li>Comunicazione multilingue (IT/ES/EN)</li>
+                <li>Formazione personalizzata (lingue &amp; STEM)</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Esperienza sintetica</h4>
+              <ul class="cv-list">
+                <!-- ✏️ Scrivi 3-4 righe ad alto impatto -->
+                <li>Coordinamento e supporto tecnico in contesti strutturati</li>
+                <li>Consulenza e accompagnamento per viaggi su misura</li>
+                <li>Docenza 1-to-1 (Italiano/Spagnolo e materie scientifiche)</li>
+              </ul>
+            </div>
+          </div>
 
-    <!-- TESTIMONIANZE BREVI -->
-    <section class="reveal" style="margin-top:22px">
-      <h2>Cosa dicono di noi</h2>
-      <div class="testi">
-        <blockquote class="quote">
-          “Viaggio cucito su misura. Zero corse, incontri bellissimi. Consigliato!”
-          <div class="who">— Sara, Vietnam 2025</div>
-        </blockquote>
-        <blockquote class="quote">
-          “Lezioni chiarissime e flessibili. Ho sbloccato la conversazione in 2 mesi.”
-          <div class="who">— Marco, Spagnolo B1</div>
-        </blockquote>
-      </div>
-    </section>
+          <!-- CTA opzionali -->
+          <!-- Se in futuro carichi un PDF in /assets/CV-Gustavo.pdf, sblocca il link qui sotto -->
+          <!-- <a class="cta-button cta-inline" href="/assets/CV-Gustavo.pdf" target="_blank" rel="noopener">Scarica CV</a> -->
+          <a class="cta-button cta-inline" href="/it/prenota.html">Parliamone</a>
+        </div>
 
-    <!-- CTA -->
-    <section class="reveal" style="margin-top:24px; text-align:center">
-      <a href="/it/contatti.html" class="cta-button">Scrivici: ti rispondiamo presto</a>
+        <div class="cv-card">
+          <h3>Valori</h3>
+          <p class="lead">Rispetto, curiosità, responsabilità. Viaggiare bene significa lasciare il mondo un po’ meglio di come lo si è trovato.</p>
+        </div>
+      </section>
     </section>
   </main>
 
   <footer>
     <p>© 2025 Air Vez — Tutti i diritti riservati</p>
   </footer>
-
-  <!-- script globale -->
   <script src="../script.js"></script>
 </body>
 </html>
