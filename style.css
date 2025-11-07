@@ -214,4 +214,51 @@ footer{ text-align:center; color: var(--muted); font-size: 14px; padding: 22px 1
   .about-aside{ position: static; }       /* ✅ evita che la foto blocchi lo scroll */
   .avatar{ max-height: 60vh; }
 }
+/* === Timeline: fix overlapping dots & date pills ======================= */
+.exp-timeline{                 /* optional wrapper around the experience list */
+  border-left: 2px solid #d7efe8;
+  margin-left: 6px;
+  padding-left: 22px;
+}
+
+.exp-item{                     /* each job/experience block */
+  position: relative;
+  padding-left: 28px;          /* space for the green dot */
+  margin: 34px 0;
+}
+
+/* the green dot */
+.exp-item::before{
+  content: "";
+  position: absolute;
+  left: -12px;                 /* sits on the vertical line */
+  top: 0.95rem;                /* aligns with the job title; tweak if needed */
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #34e1b1 0%, #0fa58a 70%);
+  box-shadow: 0 0 0 3px #e6fbf5;  /* soft ring */
+}
+
+/* date pill */
+.exp-when{
+  display: inline-block;
+  margin: 10px 0 0;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #e9fff4;
+  border: 1px solid #c7f0e5;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* if an old style was adding a dot on the pill itself, disable it */
+.exp-when::before,
+.exp-when::after{ content: none !important; }
+
+/* mobile fine-tuning */
+@media (max-width: 700px){
+  .exp-item{ padding-left: 24px; margin: 26px 0; }
+  .exp-item::before{ left: -10px; top: 0.85rem; }
+}
 
