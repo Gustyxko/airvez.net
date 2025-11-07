@@ -4,52 +4,193 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Chi Siamo – Air Vez</title>
-  <link rel="stylesheet" href="../style.css">
+
+  <!-- (opzionale, rapido) SEO base specifico della pagina -->
+  <meta name="description" content="Air Vez crea viaggi autentici e lezioni su misura. Team vicino, processi chiari e valori solidi: avventura, rispetto e connessione.">
+  <link rel="canonical" href="https://airvez.net/it/chi-siamo.html">
+
+  <link rel="alternate" href="https://airvez.net/it/chi-siamo.html" hreflang="it">
+  <link rel="alternate" href="https://airvez.net/en/about.html" hreflang="en">
+  <link rel="alternate" href="https://airvez.net/es/sobre-nosotros.html" hreflang="es">
+  <link rel="alternate" href="https://airvez.net/it/chi-siamo.html" hreflang="x-default">
+
+  <!-- stile globale -->
+  <link rel="stylesheet" href="../style.css?v=7">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Micro-stili locali, coerenti con il tuo tema */
+    .kpi { display:grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin-top:16px; }
+    .kpi .card { text-align:center; padding:18px; }
+    .kpi .num { font-size: clamp(22px, 4.2vw, 34px); font-weight:700; color: var(--text); }
+    .kpi .lab { color: var(--muted); font-size: 14px; }
+
+    .team { display:grid; gap:18px; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); }
+    .member { text-align:center; }
+    .member img { width:100%; height:220px; object-fit:cover; border-radius: var(--radius); box-shadow: var(--shadow); }
+    .member h3 { margin:10px 0 4px; }
+    .member p.role { margin:0; color: var(--muted); font-size:14px; }
+    .member p.bio { margin:8px 0 0; color: var(--muted); }
+
+    .steps { counter-reset: s; }
+    .steps .card h3::before{ counter-increment:s; content: counter(s) ". "; color: var(--accent-2); }
+
+    .timeline { border-left: 3px solid rgba(15,165,138,.18); padding-left: 14px; margin-top: 8px; }
+    .timeline .t-item { margin: 10px 0; }
+    .timeline .t-item strong { color: var(--text); }
+
+    .testi { display:grid; gap:18px; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); }
+    .quote { background: var(--card); padding:16px; border-radius: var(--radius); box-shadow: var(--shadow); font-style: italic; }
+    .quote .who { margin-top:8px; font-style: normal; color: var(--muted); font-size: 14px; }
+  </style>
 </head>
 <body>
-  <!-- header -->
   <header>
-    <nav class="nav">
+    <nav class="nav" role="navigation" aria-label="Navigazione principale">
       <a class="logo" href="index.html">🌍 Air Vez</a>
+
       <input id="nav-check" type="checkbox" class="nav-check" />
-      <label for="nav-check" class="nav-burger" aria-label="Apri menù" aria-controls="mainnav">≡</label>
+      <label for="nav-check" class="nav-burger" aria-label="Apri menù" aria-controls="mainnav" aria-expanded="false">≡</label>
+
       <ul id="mainnav" class="nav-links">
         <li><a href="/it/index.html">Home</a></li>
-        <li><a class="active" href="/it/chi-siamo.html">Chi Siamo</a></li>
+        <li><a class="active" href="/it/chi-siamo.html" aria-current="page">Chi Siamo</a></li>
         <li><a href="/it/airvez-travel.html">Air Vez Travel</a></li>
         <li><a href="/it/airvez-academia.html">Air Vez Academia</a></li>
         <li><a href="/it/prenota.html">Prenota</a></li>
         <li><a href="/it/contatti.html">Contatti</a></li>
         <li class="lang-switch">
-          <a href="/it/index.html" data-lang="it" aria-label="Italiano">🇮🇹</a>
-          <a href="/en/index.html" data-lang="en" aria-label="English">🇬🇧</a>
-          <a href="/es/index.html" data-lang="es" aria-label="Español">🇪🇸</a>
+          <a href="/it/chi-siamo.html" data-lang="it" aria-label="Italiano">🇮🇹</a>
+          <a href="/en/about.html" data-lang="en" aria-label="English">🇬🇧</a>
+          <a href="/es/sobre-nosotros.html" data-lang="es" aria-label="Español">🇪🇸</a>
         </li>
       </ul>
     </nav>
   </header>
 
   <main class="page">
-    <h1>Chi Siamo</h1>
-    <p class="lead">Crediamo nei viaggi che creano connessioni vere con persone e culture locali.</p>
-    <div class="cards">
+    <!-- HERO -->
+    <section class="hero reveal">
+      <h1>Viaggi autentici, persone vere.</h1>
+      <p class="lead">Air Vez nasce dall’idea che le esperienze migliori sono quelle che connettono: luoghi, culture e persone. Con lo stesso spirito costruiamo lezioni su misura.</p>
+      <a href="/it/contatti.html" class="cta-button">Parliamone</a>
+    </section>
+
+    <!-- KPI / PROVA SOCIALE -->
+    <section class="kpi reveal" aria-label="Risultati in breve">
       <article class="card">
-        <h3>La nostra missione</h3>
-        <p>Portarti a vivere esperienze autentiche, sostenibili e rispettose.</p>
+        <div class="num">+120</div>
+        <div class="lab">viaggi organizzati / consulenze</div>
       </article>
       <article class="card">
-        <h3>I nostri valori</h3>
-        <p>Rispetto, curiosità, avventura e condivisione.</p>
+        <div class="num">+900</div>
+        <div class="lab">ore di lezione 1-to-1</div>
       </article>
       <article class="card">
-        <h3>Come lavoriamo</h3>
-        <p>Itinerari personalizzati, contatti diretti e consigli concreti.</p>
+        <div class="num">4.9/5</div>
+        <div class="lab">soddisfazione media</div>
       </article>
-    </div>
+    </section>
+
+    <!-- VALORI -->
+    <section class="reveal" style="margin-top:18px">
+      <h2>I nostri valori</h2>
+      <div class="cards">
+        <article class="card">
+          <h3>Autenticità</h3>
+          <p>Esperienze reali, lontane dal turismo di massa, con incontri che lasciano il segno.</p>
+        </article>
+        <article class="card">
+          <h3>Rispetto</h3>
+          <p>Per culture, ambiente e persone. Viaggiare bene significa lasciare un impatto positivo.</p>
+        </article>
+        <article class="card">
+          <h3>Connessione</h3>
+          <p>Mettiamo le persone al centro: ascolto, fiducia, comunità.</p>
+        </article>
+        <article class="card">
+          <h3>Chiarezza</h3>
+          <p>Processi semplici, prezzi trasparenti, obiettivi condivisi.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- MINI-TIMELINE -->
+    <section class="reveal" style="margin-top:22px">
+      <h2>La nostra storia in breve</h2>
+      <div class="timeline">
+        <div class="t-item"><strong>Le origini:</strong> tanti paesi visitati, l’idea di trasformare l’esperienza in un servizio utile.</div>
+        <div class="t-item"><strong>Air Vez Travel:</strong> primi itinerari su misura con attenzione a ritmo, budget e autenticità.</div>
+        <div class="t-item"><strong>Air Vez Academia:</strong> nasce la linea education: Italiano/Spagnolo e materie STEM 1-to-1.</div>
+        <div class="t-item"><strong>Oggi:</strong> community in crescita, progetti media e nuovi format di viaggio/learning.</div>
+      </div>
+    </section>
+
+    <!-- TEAM -->
+    <section class="reveal" style="margin-top:22px">
+      <h2>Chi c’è dietro Air Vez</h2>
+      <div class="team">
+        <article class="card member">
+          <img src="/assets/team-gus.jpg" alt="Ritratto team Air Vez" loading="lazy">
+          <h3>Gustavo</h3>
+          <p class="role">Travel designer &amp; Content</p>
+          <p class="bio">Amo costruire viaggi fluidi, con tempo per vivere i luoghi davvero.</p>
+        </article>
+        <article class="card member">
+          <img src="/assets/team-nat.jpg" alt="Ritratto team Air Vez" loading="lazy">
+          <h3>Nataly</h3>
+          <p class="role">Academia &amp; Community</p>
+          <p class="bio">Lingue e STEM su misura: metodo chiaro, obiettivi realistici, risultati.</p>
+        </article>
+        <!-- Aggiungi altri se servono -->
+      </div>
+    </section>
+
+    <!-- COME LAVORIAMO -->
+    <section class="reveal" style="margin-top:22px">
+      <h2>Come lavoriamo</h2>
+      <div class="cards steps">
+        <article class="card">
+          <h3>Ascolto &amp; obiettivi</h3>
+          <p>Breve call o messaggio per capire preferenze, tempi e budget.</p>
+        </article>
+        <article class="card">
+          <h3>Proposta su misura</h3>
+          <p>Itinerario/programma chiaro, opzioni e costi trasparenti.</p>
+        </article>
+        <article class="card">
+          <h3>Accompagnamento</h3>
+          <p>Supporto prima/durante: consigli pratici, adattamenti, materiale.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- TESTIMONIANZE BREVI -->
+    <section class="reveal" style="margin-top:22px">
+      <h2>Cosa dicono di noi</h2>
+      <div class="testi">
+        <blockquote class="quote">
+          “Viaggio cucito su misura. Zero corse, incontri bellissimi. Consigliato!”
+          <div class="who">— Sara, Vietnam 2025</div>
+        </blockquote>
+        <blockquote class="quote">
+          “Lezioni chiarissime e flessibili. Ho sbloccato la conversazione in 2 mesi.”
+          <div class="who">— Marco, Spagnolo B1</div>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="reveal" style="margin-top:24px; text-align:center">
+      <a href="/it/contatti.html" class="cta-button">Scrivici: ti rispondiamo presto</a>
+    </section>
   </main>
 
-  <footer><p>© 2025 Air Vez</p></footer>
+  <footer>
+    <p>© 2025 Air Vez — Tutti i diritti riservati</p>
+  </footer>
+
+  <!-- script globale -->
   <script src="../script.js"></script>
 </body>
 </html>
