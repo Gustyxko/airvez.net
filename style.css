@@ -31,37 +31,34 @@ body{
 }
 
 /* ========== Header / Navbar ========== */
-header{ position:sticky; top:0; z-index:50; background:#fff; backdrop-filter:saturate(1.1) blur(6px); }
+header{
+  position: sticky; top: 0; z-index: 50;
+  background:#fff; backdrop-filter:saturate(1.1) blur(6px);
+}
 .nav{
   max-width: 1100px;
   margin: 0 auto;
   padding: 12px 16px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  display: flex; align-items: center; gap: 12px;
 }
-.logo{ font-weight:700; font-size: 1.15rem; color: var(--text); text-decoration:none; transition:opacity .18s ease; }
-
-/* ✅ mantieni sempre visibile il logo anche con menu aperto */
+.logo{
+  font-weight:700; font-size: 1.15rem;
+  color: var(--text); text-decoration:none; transition:opacity .18s ease;
+}
+/* mantieni sempre visibile il logo anche con menu aperto */
 .is-nav-open .logo{ opacity:1; pointer-events:auto; }
 
 .nav-links{
-  list-style:none;
-  display:flex;                 /* desktop: visibile e in riga */
-  gap: 12px;
-  margin:0 0 0 auto;
-  padding:0;
-  align-items:center;
-  flex-wrap:wrap;
+  list-style:none; display:flex; gap: 12px;
+  margin:0 0 0 auto; padding:0; align-items:center; flex-wrap:wrap;
 }
 .nav-links a{
-  text-decoration:none;
-  color: var(--muted);
-  padding: 8px 10px;
-  border-radius: 10px;
+  text-decoration:none; color: var(--muted);
+  padding: 8px 10px; border-radius: 10px;
 }
-.nav-links a:hover,
-.nav-links a.active{ background:#ffffff8f; color:var(--text); }
+.nav-links a:hover, .nav-links a.active{
+  background:#ffffff8f; color:var(--text);
+}
 
 /* === Lingue: solo bandiere === */
 .lang-switch{ display:flex; gap:10px; align-items:center; }
@@ -75,9 +72,7 @@ header{ position:sticky; top:0; z-index:50; background:#fff; backdrop-filter:sat
 /* ========== Hero (home) ========== */
 main{ min-height: calc(100dvh - 120px); display:grid; place-items:center; }
 .hero{
-  text-align:center;
-  max-width: 900px;
-  padding: 40px 22px 60px;
+  text-align:center; max-width: 900px; padding: 40px 22px 60px;
 }
 .hero h1{ font-size: clamp(28px, 5vw, 44px); margin: 0 0 10px 0; }
 .hero p{ font-size: clamp(16px, 2.6vw, 22px); color: var(--muted); margin: 0 0 26px; }
@@ -92,7 +87,7 @@ main{ min-height: calc(100dvh - 120px); display:grid; place-items:center; }
 .page h1{ font-size: clamp(26px, 4.6vw, 38px); margin: 6px 0 14px; }
 .lead{ color: var(--muted); max-width: 900px; }
 
-/* Cards utili per future sezioni */
+/* Cards */
 .cards{ display:grid; gap:18px; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); margin-top:16px; }
 .card{ background: var(--card); border-radius: var(--radius); padding: 18px 18px 16px; box-shadow: var(--shadow); }
 .card h3{ margin: 4px 0 8px; }
@@ -106,39 +101,26 @@ footer{ text-align:center; color: var(--muted); font-size: 14px; padding: 22px 1
 .nav-check  { display:none; }
 
 @media (max-width: 900px){
-
-  /* ✅ mostra burger su mobile */
+  /* mostra burger su mobile */
   .nav-burger{
-    display:block;
-    font-size:28px;
-    padding:8px 12px;
-    background:transparent;
-    border:none;
-    cursor:pointer;
-    user-select:none;
+    display:block; font-size:28px; padding:8px 12px;
+    background:transparent; border:none; cursor:pointer; user-select:none;
   }
 
   /* barra in alto invariata con logo + burger */
   .nav{ align-items:center; }
 
-  /* ✅ di default il pannello menu è chiuso su mobile */
+  /* di default il pannello menu è chiuso su mobile */
   .nav-links{
-    display:none;
-    width:100%;
-    flex-direction:column;
-    align-items:flex-start;
-    gap:12px;
-    padding:14px 18px;
-    background:#fff;
-    border-top:1px solid #ddd;
+    display:none; width:100%;
+    flex-direction:column; align-items:flex-start; gap:12px;
+    padding:14px 18px; background:#fff; border-top:1px solid #ddd;
     box-shadow:0 8px 20px -12px rgba(0,0,0,.15);
   }
 
-  /* ✅ pannello menu che si apre SOTTO la barra */
+  /* pannello menu che si apre SOTTO la barra */
   #nav-check:checked ~ .nav-links{
-    display:flex;
-    margin-top:8px;                /* stacco sotto la barra */
-    border-radius:12px;
+    display:flex; margin-top:8px; border-radius:12px;
     box-shadow:0 12px 28px -12px rgba(0,0,0,.18);
     animation: navDrop .22s ease-out both;
   }
@@ -146,7 +128,7 @@ footer{ text-align:center; color: var(--muted); font-size: 14px; padding: 22px 1
   .nav-links a{ padding:8px 0; font-size:18px; }
 }
 
-/* ✅ keyframes dell’animazione di apertura menu */
+/* animazione apertura menu */
 @keyframes navDrop{
   from{ opacity:0; transform: translateY(-8px); }
   to  { opacity:1; transform: translateY(0); }
@@ -157,15 +139,13 @@ footer{ text-align:center; color: var(--muted); font-size: 14px; padding: 22px 1
   header{ padding-top: env(safe-area-inset-top); }
 }
 
-/* === About layout, avatar, chips === */
+/* ========== About (Chi Siamo) ========== */
 .about{ display:grid; grid-template-columns: 360px 1fr; gap: 28px; align-items:start; }
 .about-aside{ position: sticky; top: 92px; }
 .avatar{
   width:100%; height:auto; display:block;
-  border-radius: 20px;
-  border: 3px solid #fff;
-  box-shadow: 0 18px 40px rgba(0,0,0,.14);
-  object-fit: cover;
+  border-radius: 20px; border: 3px solid #fff;
+  box-shadow: 0 18px 40px rgba(0,0,0,.14); object-fit: cover;
 }
 .chips{ display:flex; gap:10px; margin-top:14px; flex-wrap:wrap; }
 .chip{
@@ -211,84 +191,44 @@ footer{ text-align:center; color: var(--muted); font-size: 14px; padding: 22px 1
 /* — Mobile: niente sticky per la foto, layout in colonna — */
 @media (max-width: 900px){
   .about{ grid-template-columns: 1fr; }
-  .about-aside{ position: static; }       /* ✅ evita che la foto blocchi lo scroll */
+  .about-aside{ position: static; }       /* evita che la foto blocchi lo scroll */
   .avatar{ max-height: 60vh; }
 }
-/* === Timeline: fix overlapping dots & date pills ======================= */
-.exp-timeline{                 /* optional wrapper around the experience list */
-  border-left: 2px solid #d7efe8;
-  margin-left: 6px;
-  padding-left: 22px;
-}
 
-.exp-item{                     /* each job/experience block */
-  position: relative;
-  padding-left: 28px;          /* space for the green dot */
-  margin: 34px 0;
-}
-
-/* the green dot */
+/* === Timeline: fix overlapping dots & date pills === */
+.exp-timeline{ border-left: 2px solid #d7efe8; margin-left: 6px; padding-left: 22px; }
+.exp-item{ position: relative; padding-left: 28px; margin: 34px 0; }
 .exp-item::before{
-  content: "";
-  position: absolute;
-  left: -12px;                 /* sits on the vertical line */
-  top: 0.95rem;                /* aligns with the job title; tweak if needed */
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
+  content: ""; position: absolute; left: -12px; top: 0.95rem;
+  width: 12px; height: 12px; border-radius: 50%;
   background: radial-gradient(circle at 30% 30%, #34e1b1 0%, #0fa58a 70%);
-  box-shadow: 0 0 0 3px #e6fbf5;  /* soft ring */
+  box-shadow: 0 0 0 3px #e6fbf5;
 }
-
-/* date pill */
 .exp-when{
-  display: inline-block;
-  margin: 10px 0 0;
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: #e9fff4;
-  border: 1px solid #c7f0e5;
-  font-weight: 600;
-  white-space: nowrap;
+  display: inline-block; margin: 10px 0 0; padding: 6px 12px;
+  border-radius: 999px; background: #e9fff4; border: 1px solid #c7f0e5;
+  font-weight: 600; white-space: nowrap;
 }
-
-/* if an old style was adding a dot on the pill itself, disable it */
-.exp-when::before,
-.exp-when::after{ content: none !important; }
-
-/* mobile fine-tuning */
+.exp-when::before, .exp-when::after{ content: none !important; }
 @media (max-width: 700px){
   .exp-item{ padding-left: 24px; margin: 26px 0; }
   .exp-item::before{ left: -10px; top: 0.85rem; }
 }
-/* === Cookie/Consent bar === */
-.cookie-bar{
-  position: fixed; left: 12px; right:12px; bottom:12px; z-index: 9999;
-  background:#fff; border:1px solid #e2efe9; border-radius:12px; box-shadow:0 10px 28px rgba(0,0,0,.12);
-  padding:14px 16px; display:flex; gap:12px; align-items:center; flex-wrap:wrap;
-}
-.cookie-bar p{ margin:0; color:var(--text); }
-.cookie-actions{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
-.cookie-link{ color:var(--muted); text-decoration:underline; font-size:14px; }
-@media (max-width: 600px){ .cookie-bar{ left:8px; right:8px; bottom:8px; } }
 
-/* === Cookie/Consent bar (fix click) === */
+/* ========== Cookie/Consent bar (unica definizione) ========== */
 .cookie-bar{
-  position: fixed;
-  left: 12px; right: 12px; bottom: 12px;
-  z-index: 100000;             /* sopra tutto */
-  background:#fff;
-  border:1px solid #e2efe9;
-  border-radius:12px;
+  position: fixed; left: 12px; right:12px; bottom:12px;
+  z-index: 100000;                       /* sopra qualunque overlay */
+  background:#fff; border:1px solid #e2efe9; border-radius:12px;
   box-shadow:0 10px 28px rgba(0,0,0,.14);
-  padding:14px 16px;
-  display:flex; gap:12px; align-items:center; flex-wrap:wrap;
-  pointer-events: auto;        /* forza i click dentro la barra */
+  padding:14px 16px; display:flex; gap:12px; align-items:center; flex-wrap:wrap;
+  pointer-events: auto;                  /* garantisce i click */
 }
-.cookie-bar * { pointer-events: auto; } /* ulteriore garanzia */
+.cookie-bar *{ pointer-events: auto; }
 .cookie-bar p{ margin:0; color:var(--text); }
 .cookie-actions{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
 .cookie-link{ color:var(--muted); text-decoration:underline; font-size:14px; }
 @media (max-width: 600px){
   .cookie-bar{ left:8px; right:8px; bottom:8px; }
 }
+
